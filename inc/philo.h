@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 00:09:55 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:23:48 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_gen
 	int		to_sleep;
 	int		meals;
 	struct	s_philo	*philo;
-	pthread_mutex_t	print;
+	//pthread_mutex_t	print;
 }			t_gen;
 
 // status:
