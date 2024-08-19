@@ -6,12 +6,14 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 00:23:48 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:00:54 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
+#include <pthread.h>
 
 typedef struct s_gen
 {
@@ -20,7 +22,7 @@ typedef struct s_gen
 	int		to_eat;
 	int		to_sleep;
 	int		meals;
-	struct	s_philo	*philo;
+	struct s_philo	*philo;
 	//pthread_mutex_t	print;
 }			t_gen;
 
@@ -35,6 +37,9 @@ typedef struct s_philo
 	int		status;
 	int		n_eaten;
 	pthread_mutex_t	fork;
-}
+}			t_philo;
+
+/*   Basic Utils   */
+int	ft_atoi(const char *str);
 
 #endif

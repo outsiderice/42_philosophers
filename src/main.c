@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 00:27:31 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:06:25 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv)
 {
 	t_gen	info;
 
-	info = NULL;
 	if (argc > 6 || argc < 5)
 	{
 		printf("Wrong number of arguments\n");
