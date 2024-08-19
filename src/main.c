@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/19 21:38:59 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:38:46 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ int	main(int argc, char **argv)
 		printf("Wrong number of arguments\n");
 		return (2);
 	}
-	printf("This is philosophers\n");
+	if (parse(argv) == 1)
+	{
+		printf("Invalid arguments\n");
+		return (2);
+	}
+	if (store_args() == 1)
+	{
+		printf("Allocation failure\n");
+		return (1);
+	}
+	if (philosophers() == 1)
+	{
+		printf("Philosophers execution error\n");
+		return (1);
+	}
 	return (0);
 }
