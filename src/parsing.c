@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/19 23:09:12 by amagnell         ###   ########.fr       */
+/*   Created: 2024/08/19 22:52:08 by amagnell          #+#    #+#             */
+/*   Updated: 2024/08/19 23:12:53 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
 #include "../inc/parse.h"
-#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+int	ft_isnum(char c)
 {
-	if (argc > 6 || argc < 5)
-	{
-		printf("Wrong number of arguments\n");
-		return (1);
-	}
-	if (parse(argv) == 1)
-	{
-		printf("Invalid arguments\n");
-		return (2);
-	}
-	/*
-	if (store_args() == 1)
-	{
-		printf("Allocation failure\n");
-		return (3);
-	}
-	if (philosophers() == 1)
-	{
-		printf("Philosophers execution error\n");
-		return (4);
-	}*/
-	return (0);
+	if (c >= '0' && c <= '9')
+		return (TRUE);
+	return (FALSE);
 }
 
+int	parse(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while(argv[i] != NULL)
+	{
+		j = 0;
+		while(argv[i][j] != '\0')
+		{
+			if (ft_isnum(argv[i][j]) == FALSE)
+				return (EXIT_FAILURE);
+			j++;
+		}
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}

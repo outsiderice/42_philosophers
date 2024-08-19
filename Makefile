@@ -6,7 +6,7 @@
 #    By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 18:04:18 by amagnell          #+#    #+#              #
-#    Updated: 2024/08/19 20:20:21 by amagnell         ###   ########.fr        #
+#    Updated: 2024/08/19 23:08:28 by amagnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,13 @@
 NAME 		= philo
 
 #      HEADER       #
-INC		= inc/philo.h
+INC		= inc/philo.h \
+		  inc/parse.h
 
 #      FILES        #
 SRC_DIR 	= src
-SRCS 		= src/main.c
+SRCS 		= src/main.c \
+		  src/parsing.c
 
 #    OBJS & DEPS    #
 BUILD_DIR	= .build
