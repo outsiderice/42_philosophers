@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 22:52:08 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/19 23:12:53 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:24:43 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	parse(char **argv)
 	int	j;
 
 	i = 1;
-	while(argv[i] != NULL)
+	while (argv[i] != NULL)
 	{
 		j = 0;
-		while(argv[i][j] != '\0')
+		while (argv[i][j] != '\0')
 		{
 			if (ft_isnum(argv[i][j]) == FALSE)
 				return (EXIT_FAILURE);
