@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 01:06:25 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 08:25:49 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,82 @@
 #include "../inc/parse.h"
 #include <stdio.h>
 
-void	store_args(char **argv, t_gen *info)
+int	create_threads(t_table *t)
 {
-	info->philos = ft_atoi(argv[1]);
-	info->to_die = ft_atoi(argv[2]);
-	info->to_eat = ft_atoi(argv[3]);
-	info->to_sleep = ft_atoi(argv[4]);
-	info->meals = -1;
+	int	i;
+
+	i = 0;
+	while (i < t->n_philos)
+	{
+		pthread_create();
+	}
+}
+
+int	philosophers(t_table *t)
+{
+	if (create_threads(t) == 1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	init_philos(t_table *t)
+{
+	int	i;
+
+	i = 1;
+	while (i <= t->n_philos)
+	{
+		t->philo[i].name = i;
+		t->philo[i].status = 1;
+		t->philo[i].n_eaten = 0;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	init_mutex(t_table *t)
+{
+	int	i;
+
+	i = 0;
+	if (pthread_mutex_init(&t->print, NULL) != 0)
+		return (EXIT_FAILURE);
+	while (i <= t->n_philos)
+	{
+		if (pthread_mutex_init(&t->forks[i], NULL) != 0)
+		{
+			pthread_mutex_destroy(&t->print);
+			return (EXIT_FAILURE);
+		}
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	init_table(char **argv, t_table *t)
+{
+	t->n_philos = ft_atoi(argv[1]);
+	t->to_die = ft_atoi(argv[2]);
+	t->to_eat = ft_atoi(argv[3]);
+	t->to_sleep = ft_atoi(argv[4]);
+	t->meals = -1;
 	if (argv[5] != NULL)
-		info->meals = ft_atoi(argv[5]);
-	info->philo = NULL;
+		t->meals = ft_atoi(argv[5]);
+	t->philo = malloc(sizeof(t_philo) * table->n_philos);
+	if (!t_philo)
+		return(EXIT_FAILURE);
+	if (init_philos(table) == 1)
+		return (ft_free(t->philo, NULL, EXIT_FAILURE));
+	t->forks = malloc(sizeof(pthread_mutex_t) * table->n_philos);
+	if (!t->forks)
+		return (ft_free(t->philo, NULL, EXIT_FAILURE));
+	if (init_mutex(t) == 1)
+		return (ft_free(t->philo, t->forks, EXIT_FAILURE));
+	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
 {
-	t_gen	info;
+	t_table	t;
 
 	if (argc > 6 || argc < 5)
 	{
@@ -40,12 +101,15 @@ int	main(int argc, char **argv)
 		printf("Invalid arguments\n");
 		return (2);
 	}
-	store_args(argv, &info);
-	/*
-	if (philosophers() == 1)
+	if (init_table(argv, &t) == 1)
+	{
+		printf("Error initializing\n");
+		return (3);
+	}
+	if (philosophers(&t) == 1)
 	{
 		printf("Philosophers execution error\n");
-		return (3);
-	}*/
+		return (4);
+	}
 	return (0);
 }

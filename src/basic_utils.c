@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 00:51:45 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 08:26:43 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,12 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (n * a);
+}
+
+int	ft_free(void *arg, void *arg2 int status)
+{
+	free(arg);
+	if (arg2)
+		free(arg2);
+	return (status);
 }
