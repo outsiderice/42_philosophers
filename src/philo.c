@@ -6,11 +6,18 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 11:35:30 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:00:52 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void	print_msg(t_philo *philo, char *action)
+{
+	pthread_mutex_lock(&philo->t->print);
+	printf("%d %s\n", philo->name, action);
+	pthread_mutex_unlock(&philo->t->print);
+}
 
 int	join_threads(t_table *t)
 {
