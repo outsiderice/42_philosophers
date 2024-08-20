@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 08:32:47 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 08:40:44 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,25 @@ int	philosophers(t_table *t)
 	return (EXIT_SUCCESS);
 }
 
-int	init_philos(t_table *t)
+void	init_philos(t_table *t)
 {
 	int	i;
+	int	left;
 
-	i = 1;
+	i = 0;
 	while (i <= t->n_philos)
 	{
+		left = i + 1;
+		if (left > t->n_philos)
+			left = 0;
 		t->philo[i].name = i;
 		t->philo[i].status = 1;
 		t->philo[i].n_eaten = 0;
+		t->philo[i].r_fork = t->forks[i];
+		t->philo[i].l_fork = t->forks[left];
+		t->philo[i].t = t;
+		i++;
 	}
-	return (EXIT_SUCCESS);
 }
 
 int	init_mutex(t_table *t)
@@ -82,8 +89,7 @@ int	init_table(char **argv, t_table *t)
 		return (ft_free(t->philo, NULL, EXIT_FAILURE));
 	if (init_mutex(t) == 1)
 		return (ft_free(t->philo, t->forks, EXIT_FAILURE));
-	if (init_philos(table) == 1)
-		return (ft_free(t->philo, t->forks, EXIT_FAILURE));
+	init_philos(table);
 	return (EXIT_SUCCESS);
 }
 
