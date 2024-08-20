@@ -6,31 +6,13 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 08:40:44 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 09:22:18 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 #include "../inc/parse.h"
 #include <stdio.h>
-
-int	create_threads(t_table *t)
-{
-	int	i;
-
-	i = 0;
-	while (i < t->n_philos)
-	{
-		pthread_create();
-	}
-}
-
-int	philosophers(t_table *t)
-{
-	if (create_threads(t) == 1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
 
 void	init_philos(t_table *t)
 {
@@ -43,7 +25,7 @@ void	init_philos(t_table *t)
 		left = i + 1;
 		if (left > t->n_philos)
 			left = 0;
-		t->philo[i].name = i;
+		t->philo[i].name = i + 1;
 		t->philo[i].status = 1;
 		t->philo[i].n_eaten = 0;
 		t->philo[i].r_fork = t->forks[i];
@@ -60,7 +42,7 @@ int	init_mutex(t_table *t)
 	i = 0;
 	if (pthread_mutex_init(&t->print, NULL) != 0)
 		return (EXIT_FAILURE);
-	while (i <= t->n_philos)
+	while (i < t->n_philos)
 	{
 		if (pthread_mutex_init(&t->forks[i], NULL) != 0)
 		{
