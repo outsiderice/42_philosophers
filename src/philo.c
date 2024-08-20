@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 11:32:42 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:35:30 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	create_threads(t_table *t)
 	i = 0;
 	while (i < t->n_philos)
 	{
-		printf("address %d is %p\n", i, &t->philo[i]);
 		if (pthread_create(&t->philo[i].id, NULL, (void *)routine, &t->philo[i]) != 0)
 			return (EXIT_FAILURE);
 		i++;
@@ -50,5 +49,6 @@ int	philosophers(t_table *t)
 		return (EXIT_FAILURE);
 	}
 	join_threads(t);
+	ft_free(t->philo, t->forks, 0);
 	return (EXIT_SUCCESS);
 }
