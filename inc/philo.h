@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 09:48:56 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 10:59:00 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PHILO_H
 
 #include <pthread.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct s_table
 {
@@ -43,11 +45,14 @@ typedef struct s_philo
 	struct s_table	*t;
 }			t_philo;
 
-/*   Routine   */
+/*   Philo         */
+int	philosophers(t_table *t);
+
+/*   Routine       */
 void	*routine(t_philo *philo);
 
 /*   Basic Utils   */
 int	ft_atoi(const char *str);
-int	ft_free(void *arg, void *arg2 int status);
+int	ft_free(void *arg, void *arg2, int status);
 
 #endif

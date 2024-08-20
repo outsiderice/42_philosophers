@@ -6,13 +6,12 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 09:22:18 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 10:58:44 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 #include "../inc/parse.h"
-#include <stdio.h>
 
 void	init_philos(t_table *t)
 {
@@ -28,8 +27,8 @@ void	init_philos(t_table *t)
 		t->philo[i].name = i + 1;
 		t->philo[i].status = 1;
 		t->philo[i].n_eaten = 0;
-		t->philo[i].r_fork = t->forks[i];
-		t->philo[i].l_fork = t->forks[left];
+		t->philo[i].r_fork = &t->forks[i];
+		t->philo[i].l_fork = &t->forks[left];
 		t->philo[i].t = t;
 		i++;
 	}
@@ -63,15 +62,15 @@ int	init_table(char **argv, t_table *t)
 	t->meals = -1;
 	if (argv[5] != NULL)
 		t->meals = ft_atoi(argv[5]);
-	t->philo = malloc(sizeof(t_philo) * table->n_philos);
-	if (!t_philo)
+	t->philo = malloc(sizeof(t_philo) * t->n_philos);
+	if (!t->philo)
 		return(EXIT_FAILURE);
-	t->forks = malloc(sizeof(pthread_mutex_t) * table->n_philos);
+	t->forks = malloc(sizeof(pthread_mutex_t) * t->n_philos);
 	if (!t->forks)
 		return (ft_free(t->philo, NULL, EXIT_FAILURE));
 	if (init_mutex(t) == 1)
 		return (ft_free(t->philo, t->forks, EXIT_FAILURE));
-	init_philos(table);
+	init_philos(t);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,11 +6,25 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 09:49:05 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 10:53:45 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+int	join_threads(t_table *t)
+{
+	int	i;
+
+	i = 0;
+	while (i < t->n_philos)
+	{
+		if (pthread_join(*t->philo[i].id, (void **)&t->philo[i].status) != 0)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
 
 int	create_threads(t_table *t)
 {
@@ -19,10 +33,11 @@ int	create_threads(t_table *t)
 	i = 0;
 	while (i < t->n_philos)
 	{
-		if (pthread_create(&t->philos[i].id, NULL, &routine, &t->philos[i]) != 0)
+		if (pthread_create(t->philo[i].id, NULL, (void *)routine, &t->philo[i]) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 int	philosophers(t_table *t)
@@ -33,6 +48,6 @@ int	philosophers(t_table *t)
 		ft_free(t->philo, t->forks, 1);
 		return (EXIT_FAILURE);
 	}
-	join_threads();
+	join_threads(t);
 	return (EXIT_SUCCESS);
 }

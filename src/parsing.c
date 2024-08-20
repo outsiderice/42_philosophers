@@ -6,12 +6,11 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 22:52:08 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/19 23:24:43 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 10:45:36 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parse.h"
-#include <unistd.h>
 #include <stdlib.h>
 
 int	ft_isnum(char c)

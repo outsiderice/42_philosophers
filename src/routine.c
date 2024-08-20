@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 09:49:34 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 10:58:21 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	*routine(t_philo *philo)
 {
-	printf();
-	return (philo->status);
+	int	*status;
+
+	status = &philo->status;
+	printf("I'm philosopher %d\n", philo->name);
+	return ((void *) status);
 }
