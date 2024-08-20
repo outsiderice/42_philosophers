@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 11:01:39 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:04:22 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_philos(t_table *t)
 	while (i < t->n_philos)
 	{
 		left = i + 1;
-		if (left > t->n_philos)
+		if (left >= t->n_philos)
 			left = 0;
 		t->philo[i].name = i + 1;
 		t->philo[i].status = 1;

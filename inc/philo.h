@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 10:59:00 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:31:47 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_table
 // eaten all meals = 0
 typedef struct s_philo
 {
-	pthread_t	*id;
+	pthread_t	id;
 	int		name;
 	int		status;
 	int		n_eaten;

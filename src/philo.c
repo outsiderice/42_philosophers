@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 10:53:45 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:32:42 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	join_threads(t_table *t)
 	i = 0;
 	while (i < t->n_philos)
 	{
-		if (pthread_join(*t->philo[i].id, (void **)&t->philo[i].status) != 0)
+		if (pthread_join(t->philo[i].id, (void **)&t->philo[i].status) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
@@ -33,7 +33,8 @@ int	create_threads(t_table *t)
 	i = 0;
 	while (i < t->n_philos)
 	{
-		if (pthread_create(t->philo[i].id, NULL, (void *)routine, &t->philo[i]) != 0)
+		printf("address %d is %p\n", i, &t->philo[i]);
+		if (pthread_create(&t->philo[i].id, NULL, (void *)routine, &t->philo[i]) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
