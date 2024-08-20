@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 08:25:49 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 08:32:47 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	init_table(char **argv, t_table *t)
 	t->philo = malloc(sizeof(t_philo) * table->n_philos);
 	if (!t_philo)
 		return(EXIT_FAILURE);
-	if (init_philos(table) == 1)
-		return (ft_free(t->philo, NULL, EXIT_FAILURE));
 	t->forks = malloc(sizeof(pthread_mutex_t) * table->n_philos);
 	if (!t->forks)
 		return (ft_free(t->philo, NULL, EXIT_FAILURE));
 	if (init_mutex(t) == 1)
+		return (ft_free(t->philo, t->forks, EXIT_FAILURE));
+	if (init_philos(table) == 1)
 		return (ft_free(t->philo, t->forks, EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }
