@@ -6,7 +6,7 @@
 #    By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 18:04:18 by amagnell          #+#    #+#              #
-#    Updated: 2024/08/20 00:58:15 by amagnell         ###   ########.fr        #
+#    Updated: 2024/08/20 09:50:59 by amagnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ INC		= inc/philo.h \
 SRC_DIR 	= src
 SRCS 		= src/main.c \
 		  src/parsing.c \
+		  src/philo.c \
+		  src/routine.c \
 		  src/basic_utils.c
 
 #    OBJS & DEPS    #

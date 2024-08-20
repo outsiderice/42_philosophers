@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 09:47:03 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/20 09:48:56 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	struct s_table	*t;
 }			t_philo;
+
+/*   Routine   */
+void	*routine(t_philo *philo);
 
 /*   Basic Utils   */
 int	ft_atoi(const char *str);
