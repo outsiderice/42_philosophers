@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/21 14:26:42 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:39:06 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/time.h>
 
 typedef struct s_table
 {
@@ -26,6 +27,7 @@ typedef struct s_table
 	int		meals;
 	int		end;
 	struct s_philo	*philo;
+	struct timeval	start;
 	pthread_mutex_t	print;
 	pthread_mutex_t	ready;
 	pthread_mutex_t	*forks;
@@ -44,11 +46,13 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	struct s_table	*t;
+	long		now;
 }			t_philo;
 
 /*   Philo         */
 int	philosophers(t_table *t);
 void	print_msg(t_philo *philo, char *action);
+int	ft_time(t_philo *philo);
 
 /*   Routine       */
 void	*routine(t_philo *philo);

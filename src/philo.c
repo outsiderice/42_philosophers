@@ -6,16 +6,29 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/21 14:31:11 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:03:13 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+int	ft_time(t_philo *philo)
+{
+	struct timeval	now;
+
+	if (gettimeofday(&now, NULL) == -1)
+		return (EXIT_FAILURE);
+	printf("START is %ld\n", philo->t->start.tv_sec);
+	philo->now = now.tv_sec - philo->t->start.tv_sec;
+	if (philo->now != 0)
+		philo->now = philo->now * 1000;
+	return (EXIT_SUCCESS);
+}
+
 void	print_msg(t_philo *philo, char *action)
 {
 	pthread_mutex_lock(&philo->t->print);
-	printf("%d %s\n", philo->name, action);
+	printf("%ld %d %s\n",philo->now, philo->name, action);
 	pthread_mutex_unlock(&philo->t->print);
 }
 
@@ -46,6 +59,12 @@ int	create_threads(t_table *t)
 		i++;
 	}
 	pthread_mutex_unlock(&t->ready);
+	if (gettimeofday(&t->start, NULL) == -1)
+	{
+		//destroy mutexs
+		ft_free(t->philo, t->forks, 1);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
