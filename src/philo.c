@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/21 16:03:13 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:29:01 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_time(t_philo *philo)
 
 	if (gettimeofday(&now, NULL) == -1)
 		return (EXIT_FAILURE);
-	printf("START is %ld\n", philo->t->start.tv_sec);
 	philo->now = now.tv_sec - philo->t->start.tv_sec;
 	if (philo->now != 0)
 		philo->now = philo->now * 1000;
@@ -59,18 +58,18 @@ int	create_threads(t_table *t)
 		i++;
 	}
 	pthread_mutex_unlock(&t->ready);
-	if (gettimeofday(&t->start, NULL) == -1)
-	{
-		//destroy mutexs
-		ft_free(t->philo, t->forks, 1);
-		return (EXIT_FAILURE);
-	}
 	return (EXIT_SUCCESS);
 }
 
 int	philosophers(t_table *t)
 {
 	if (create_threads(t) == 1)
+	{
+		//destroy mutexs
+		ft_free(t->philo, t->forks, 1);
+		return (EXIT_FAILURE);
+	}
+	if (gettimeofday(&t->start, NULL) == -1)
 	{
 		//destroy mutexs
 		ft_free(t->philo, t->forks, 1);
