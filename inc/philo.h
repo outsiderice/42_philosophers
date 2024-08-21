@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 12:01:31 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:26:42 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_table
 	int		end;
 	struct s_philo	*philo;
 	pthread_mutex_t	print;
+	pthread_mutex_t	ready;
 	pthread_mutex_t	*forks;
 }			t_table;
 

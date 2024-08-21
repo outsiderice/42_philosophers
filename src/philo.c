@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 12:00:52 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:31:11 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ int	create_threads(t_table *t)
 	int	i;
 	
 	i = 0;
+	pthread_mutex_lock(&t->ready);
 	while (i < t->n_philos)
 	{
 		if (pthread_create(&t->philo[i].id, NULL, (void *)routine, &t->philo[i]) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
+	pthread_mutex_unlock(&t->ready);
 	return (EXIT_SUCCESS);
 }
 

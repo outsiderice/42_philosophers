@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 11:04:22 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:31:08 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ int	init_mutex(t_table *t)
 	i = 0;
 	if (pthread_mutex_init(&t->print, NULL) != 0)
 		return (EXIT_FAILURE);
+	if (pthread_mutex_init(&t->ready, NULL) != 0)
+	{
+		pthread_mutex_destroy(&t->print);
+		return (EXIT_FAILURE);
+	}
 	while (i < t->n_philos)
 	{
 		if (pthread_mutex_init(&t->forks[i], NULL) != 0)
