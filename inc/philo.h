@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/21 15:39:06 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:59:59 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_philo
 /*   Philo         */
 int	philosophers(t_table *t);
 void	print_msg(t_philo *philo, char *action);
-int	ft_time(t_philo *philo);
 
 /*   Routine       */
 void	*routine(t_philo *philo);

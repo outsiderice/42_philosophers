@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/21 16:29:01 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:59:39 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_time(t_philo *philo)
 
 void	print_msg(t_philo *philo, char *action)
 {
+	ft_time(philo);
 	pthread_mutex_lock(&philo->t->print);
 	printf("%ld %d %s\n",philo->now, philo->name, action);
 	pthread_mutex_unlock(&philo->t->print);
