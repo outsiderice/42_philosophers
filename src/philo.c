@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/23 12:58:22 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:33:59 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,22 @@
 
 int	ft_time(t_philo *philo)
 {
-	struct timeval	now;
+	struct timeval	time;
+	int		now;
 
-	if (gettimeofday(&now, NULL) == -1)
+	if (gettimeofday(&time, NULL) == -1)
 		return (EXIT_FAILURE);
-	philo->now = now.tv_usec - philo->t->start.tv_usec;
-	if (philo->now != 0)
-		philo->now = philo->now / 1000;
-	return (EXIT_SUCCESS);
+	now = (time.tv_sec - philo->t->start.tv_sec) * 1000
+		+ (time.tv_usec - philo->t->start.tv_usec) / 1000;
+	return (now);
 }
 
 void	print_msg(t_philo *philo, char *action)
 {
 	ft_time(philo);
 	pthread_mutex_lock(&philo->t->print);
-	printf("%ld %d %s\n",philo->now, philo->name, action);
+	if (!philo->t->any_dead)
+		printf("%ld %d %s\n",philo->now, philo->name, action);
 	pthread_mutex_unlock(&philo->t->print);
 }
 
