@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/21 17:59:59 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:20:38 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_table
 	int		to_eat;
 	int		to_sleep;
 	int		meals;
-	int		end;
+	int		any_dead;
 	struct s_philo	*philo;
 	struct timeval	start;
 	pthread_mutex_t	print;
