@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/21 17:59:39 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:58:22 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_time(t_philo *philo)
 
 	if (gettimeofday(&now, NULL) == -1)
 		return (EXIT_FAILURE);
-	philo->now = now.tv_sec - philo->t->start.tv_sec;
+	philo->now = now.tv_usec - philo->t->start.tv_usec;
 	if (philo->now != 0)
-		philo->now = philo->now * 1000;
+		philo->now = philo->now / 1000;
 	return (EXIT_SUCCESS);
 }
 
