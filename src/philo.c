@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/23 14:33:59 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:37:50 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	create_threads(t_table *t)
 			return (EXIT_FAILURE);
 		i++;
 	}
-	pthread_mutex_unlock(&t->ready);
 	return (EXIT_SUCCESS);
 }
 
@@ -77,6 +76,7 @@ int	philosophers(t_table *t)
 		ft_free(t->philo, t->forks, 1);
 		return (EXIT_FAILURE);
 	}
+	pthread_mutex_unlock(&t->ready);
 	join_threads(t);
 	ft_free(t->philo, t->forks, 0);
 	return (EXIT_SUCCESS);
