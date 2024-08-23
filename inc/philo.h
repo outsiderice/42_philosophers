@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/23 14:35:18 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:50:57 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ typedef struct s_table
 	pthread_mutex_t	*forks;
 }			t_table;
 
-// status:
-// alive = 1
-// dead = -1
-// eaten all meals = 0
 typedef struct s_philo
 {
 	pthread_t	id;
@@ -51,6 +47,7 @@ typedef struct s_philo
 /*   Philo         */
 int	philosophers(t_table *t);
 void	print_msg(t_philo *philo, char *action);
+int	ft_time(t_table *t);
 
 /*   Routine       */
 void	*routine(t_philo *philo);

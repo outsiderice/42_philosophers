@@ -6,21 +6,21 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/23 14:44:58 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:50:48 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	ft_time(t_philo *philo)
+int	ft_time(t_table *t)
 {
 	struct timeval	time;
 	int		now;
 
 	if (gettimeofday(&time, NULL) == -1)
 		return (EXIT_FAILURE);
-	now = (time.tv_sec - philo->t->start.tv_sec) * 1000
-		+ (time.tv_usec - philo->t->start.tv_usec) / 1000;
+	now = (time.tv_sec - t->start.tv_sec) * 1000
+		+ (time.tv_usec - t->start.tv_usec) / 1000;
 	return (now);
 }
 
