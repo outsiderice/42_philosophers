@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/23 14:37:50 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:42:49 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@ int	ft_time(t_philo *philo)
 	return (now);
 }
 
-void	print_msg(t_philo *philo, char *action)
+int	print_msg(t_philo *philo, char *action)
 {
-	ft_time(philo);
+	int	now;
+
+	now = ft_time(philo);
+	if (now == -1)
+		return (EXIT_FAILURE);
 	pthread_mutex_lock(&philo->t->print);
 	if (!philo->t->any_dead)
 		printf("%ld %d %s\n",philo->now, philo->name, action);
 	pthread_mutex_unlock(&philo->t->print);
+	return (EXIT_SUCCESS);
 }
 
 int	join_threads(t_table *t)
