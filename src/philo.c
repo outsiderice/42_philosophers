@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/23 14:42:49 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:44:58 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	print_msg(t_philo *philo, char *action)
 		return (EXIT_FAILURE);
 	pthread_mutex_lock(&philo->t->print);
 	if (!philo->t->any_dead)
-		printf("%ld %d %s\n",philo->now, philo->name, action);
+		printf("%d %d %s\n",now, philo->name, action);
 	pthread_mutex_unlock(&philo->t->print);
 	return (EXIT_SUCCESS);
 }
