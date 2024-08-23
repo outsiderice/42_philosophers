@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/20 10:59:29 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:54:30 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,18 @@ int	ft_free(void *arg, void *arg2, int status)
 	if (arg2)
 		free(arg2);
 	return (status);
+}
+
+int	ft_usleep(t_table *t, int wait)
+{
+	int	start;
+	//end wait = now + wait 
+
+	start = ft_time(t);
+	if (start == -1)
+		return (EXIT_FAILURE);
+	while ()
+	{
+		now =  
+	}
 }
