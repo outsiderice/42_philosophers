@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/24 19:06:33 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:08:08 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	sleeping()
 void	eating()
 {
 	if ((philo->name % 2) == 0)
-		ft_usleep(1);
+		if (ft_usleep(1) == 1)
+			return(EXIT_FAILURE);
 	pthread_mutex_lock(&philo->r_fork);
 }
 */
