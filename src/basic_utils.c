@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/23 14:54:30 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:57:48 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,20 @@ int	ft_free(void *arg, void *arg2, int status)
 
 int	ft_usleep(t_table *t, int wait)
 {
-	int	start;
-	//end wait = now + wait 
+	int	wait_start;
+	int	time_elapsed;
 
-	start = ft_time(t);
-	if (start == -1)
+	wait_start = ft_time(t);
+	if (wait_start == -1)
 		return (EXIT_FAILURE);
-	while ()
+	while ("time passes")
 	{
-		now =  
+		time_elapsed = ft_time(t);
+		if (time_elapsed == -1)
+			return (EXIT_FAILURE);
+		if (time_elapsed - wait_start >= wait)
+			break ;
+		usleep(100);
 	}
+	return (EXIT_SUCCESS);
 }
