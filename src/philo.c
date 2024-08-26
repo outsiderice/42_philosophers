@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 12:28:49 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:32:55 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	create_threads(t_table *t)
 	pthread_mutex_lock(&t->ready);
 	while (i < t->n_philos)
 	{
-		if (pthread_create(&t->philo[i].id, NULL, (void *)routine, &t->philo[i]) != 0)
+		if (pthread_create(&t->philo[i].id, NULL, (void *)philo_start, &t->philo[i]) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
@@ -84,6 +84,7 @@ int	philosophers(t_table *t)
 		return (EXIT_FAILURE);
 	}
 	pthread_mutex_unlock(&t->ready);
+	//watch_threads(t);
 	join_threads(t);
 	ft_free(t->philo, t->forks, 0);
 	return (EXIT_SUCCESS);
