@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 13:28:51 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:16:49 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ int	join_threads(t_table *t)
 	}
 	return (EXIT_SUCCESS);
 }
+
+/*
+void	watch_threads(t_table *t)
+{
+}
+ */
 
 int	create_threads(t_table *t)
 {

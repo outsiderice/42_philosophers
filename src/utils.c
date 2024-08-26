@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 13:27:57 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:06:53 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_usleep(t_table *t, int wait)
 			return (EXIT_FAILURE);
 		if (time_elapsed - wait_start >= wait)
 			break ;
-		usleep(100);
+		usleep(1000);
 	}
 	return (EXIT_SUCCESS);
 }
