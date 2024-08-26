@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 11:55:40 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:28:49 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ int	print_msg(t_philo *philo, char *action)
 int	join_threads(t_table *t)
 {
 	int	i;
+	int	*return_val;
 
 	i = 0;
 	while (i < t->n_philos)
 	{
-		if (pthread_join(t->philo[i].id, (void **)&t->philo[i].status) != 0)
+		if (pthread_join(t->philo[i].id, (void **)return_val) != 0 || \
+				*return_val == 1)
 			return (EXIT_FAILURE);
 		i++;
 	}

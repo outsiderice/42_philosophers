@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 12:19:20 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:29:41 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	eating()
 }
 */
 
+
+
 void	*philo_start(t_philo *philo)
 {
 	int	*status;
@@ -33,9 +35,14 @@ void	*philo_start(t_philo *philo)
 	pthread_mutex_unlock(&philo->t->ready);
 	if (philo->t->n_philos == 1)
 		wait_to_die(philo);
-	if ((philo->name % 2) == 0)
-		if (ft_usleep(1) == 1)
-			return((void *) status);
+	else
+	{
+		if((philo->name % 2) == 0)
+		{
+			if (ft_usleep(1) == 1)
+				return((void *) status);
+		}
+	}
 	exit = EXIT_SUCCESS;
 	return ((void *) status);
 }
