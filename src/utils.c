@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 15:32:08 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:20:13 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int	ft_time(t_table *t)
 	int				now;
 
 	if (gettimeofday(&time, NULL) == -1)
+	{
+		t->end = 1;
 		return (-1);
+	}
 	now = (time.tv_sec - t->start.tv_sec) * 1000
 		+ (time.tv_usec - t->start.tv_usec) / 1000;
 	return (now);

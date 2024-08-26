@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 15:32:46 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:05:19 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	philo_loop(t_philo *philo)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int	wait_to_die(t_philo *philo)
+{
 }
 
 void	*philo_start(t_philo *philo)
