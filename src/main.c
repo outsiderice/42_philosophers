@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/21 14:31:08 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:29:40 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	init_table(char **argv, t_table *t)
 		t->meals = ft_atoi(argv[5]);
 	t->philo = malloc(sizeof(t_philo) * t->n_philos);
 	if (!t->philo)
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	t->forks = malloc(sizeof(pthread_mutex_t) * t->n_philos);
 	if (!t->forks)
 		return (ft_free(t->philo, NULL, EXIT_FAILURE));

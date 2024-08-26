@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 14:16:49 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:33:17 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	watch_threads(t_table *t)
 int	create_threads(t_table *t)
 {
 	int	i;
-	
+
 	i = 0;
 	pthread_mutex_lock(&t->ready);
 	while (i < t->n_philos)

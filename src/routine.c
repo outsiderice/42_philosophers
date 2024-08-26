@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 14:16:44 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:32:46 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	eating()
 
 int	philo_loop(t_philo *philo)
 {
-	while(philo->)
+	while (philo->)
 	{
 		if (eating(philo) == 1)
 			return (EXIT_FAILURE);
@@ -46,7 +46,7 @@ void	*philo_start(t_philo *philo)
 	}
 	else
 	{
-		if((philo->name % 2) == 0)
+		if ((philo->name % 2) == 0)
 		{
 			if (ft_usleep(1) == 1)
 				return ;
