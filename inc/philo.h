@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 12:19:15 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/26 13:21:00 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,20 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	struct s_table	*t;
+	int		success;
 }			t_philo;
 
 /*   Philo         */
 int	philosophers(t_table *t);
-void	print_msg(t_philo *philo, char *action);
-int	ft_time(t_table *t);
 
 /*   Routine       */
 void	*philo_start(t_philo *philo);
 
-/*   Basic Utils   */
+/*   Utils   */
 int	ft_atoi(const char *str);
 int	ft_free(void *arg, void *arg2, int status);
+int	ft_usleep(t_table *t, int wait);
+int	ft_time(t_table *t);
+void	print_msg(t_philo *philo, char *action);
 
 #endif
