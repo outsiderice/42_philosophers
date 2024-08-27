@@ -33,6 +33,14 @@ void	init_philos(t_table *t)
 	}
 }
 
+void	destroy_all_mutex(t_table *t, int i)
+{
+	pthread_mutex_destroy(&t->print);
+	pthread_mutex_destroy(&t->ready);
+	while (--i >= 0)
+		pthread_mutex_destroy(&t->forks[i]);
+}
+
 int	init_mutex(t_table *t)
 {
 	int	i;
@@ -49,7 +57,7 @@ int	init_mutex(t_table *t)
 	{
 		if (pthread_mutex_init(&t->forks[i], NULL) != 0)
 		{
-			pthread_mutex_destroy(&t->print);
+			destroy_all_mutex(t, i);
 			return (EXIT_FAILURE);
 		}
 		i++;
@@ -97,9 +105,9 @@ int	main(int argc, char **argv)
 		printf("Error initializing\n");
 		return (3);
 	}
-	if (philosophers(&t) == 1)
+	if (philosophers(&t) == 1 || t.error)
 	{
-		printf("Philosophers execution error\n");
+		printf("Philosophers execution failure\n");
 		return (4);
 	}
 	return (0);

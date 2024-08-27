@@ -28,7 +28,7 @@ int	join_threads(t_table *t)
 	return (EXIT_SUCCESS);
 }
 
-void	watch_threads(t_table *t)
+int	watch_threads(t_table *t)
 {
 	while (1)
 	{
@@ -38,10 +38,10 @@ void	watch_threads(t_table *t)
 			return (EXIT_SUCCESS);
 		}
 	}
-	join_threads(t);
+	if (join_threads(t) == 1)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
-
 
 int	create_threads(t_table *t)
 {
@@ -62,19 +62,24 @@ int	philosophers(t_table *t)
 {
 	if (create_threads(t) == 1)
 	{
-		//destroy mutexs
+		destroy_all_mutex(t, t->n_philos);
 		ft_free(t->philo, t->forks, 1);
 		return (EXIT_FAILURE);
 	}
 	if (gettimeofday(&t->start, NULL) == -1)
 	{
-		//destroy mutexs
+		destroy_all_mutex(t, t->n_philos);
 		ft_free(t->philo, t->forks, 1);
 		return (EXIT_FAILURE);
 	}
 	pthread_mutex_unlock(&t->ready);
-	watch_threads(t);	
-	//destroy_all
+	if (watch_threads(t) == 1)
+	{
+		destroy_all_mutex(t, t->n_philos);
+		ft_free(t->philo, t->forks, 1);
+		return (EXIT_FAILURE);
+	}	
+	destroy_all_mutex(t, t->n_philos);
 	ft_free(t->philo, t->forks, 0);
 	return (EXIT_SUCCESS);
 }

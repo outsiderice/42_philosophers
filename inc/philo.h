@@ -46,13 +46,16 @@ typedef struct s_philo
 	int				timer;
 }	t_philo;
 
+/*   Main          */
+void	destroy_all_mutex(t_table *t, int i);
+
 /*   Philo         */
 int		philosophers(t_table *t);
 
 /*   Routine       */
 void	*philo_start(t_philo *philo);
 
-/*   Utils   */
+/*   Utils         */
 int		ft_atoi(const char *str);
 int		ft_free(void *arg, void *arg2, int status);
 int		time_passes(t_table *t, int wait);
