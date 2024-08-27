@@ -13,19 +13,21 @@
 #include "../inc/philo.h"
 #include <unistd.h>
 
-/*
-int	sleeping()
-{}
+int	sleeping(t_philo *philo)
+{
+}
 
-int	eating()
+int	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->r_fork);
+
+	pthread_mutex_lock(&philo->l_fork);
 }
-*/
+
 
 int	philo_loop(t_philo *philo)
 {
-	while (philo->)
+	while (!philo->t->end)
 	{
 		if (eating(philo) == 1)
 			return (EXIT_FAILURE);
@@ -37,6 +39,7 @@ int	philo_loop(t_philo *philo)
 
 int	wait_to_die(t_philo *philo)
 {
+
 }
 
 void	*philo_start(t_philo *philo)
@@ -52,7 +55,7 @@ void	*philo_start(t_philo *philo)
 	{
 		if ((philo->name % 2) == 0)
 		{
-			if (ft_usleep(1) == 1)
+			if (time_passes(philo->t, 1) == 1)
 				return ;
 		}
 		if (philo_loop(philo) == 1)

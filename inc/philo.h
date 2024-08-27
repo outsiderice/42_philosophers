@@ -54,7 +54,7 @@ void	*philo_start(t_philo *philo);
 /*   Utils   */
 int		ft_atoi(const char *str);
 int		ft_free(void *arg, void *arg2, int status);
-int		ft_usleep(t_table *t, int wait);
+int		time_passes(t_table *t, int wait);
 int		ft_time(t_table *t);
 void	print_msg(t_philo *philo, char *action);
 

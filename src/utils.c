@@ -45,7 +45,7 @@ int	ft_free(void *arg, void *arg2, int status)
 	return (status);
 }
 
-int	ft_usleep(t_table *t, int wait)
+int	time_passes(t_table *t, int wait)
 {
 	int	wait_start;
 	int	time_elapsed;
@@ -88,7 +88,7 @@ int	print_msg(t_philo *philo, char *action)
 	if (now == -1)
 		return (EXIT_FAILURE);
 	pthread_mutex_lock(&philo->t->print);
-	if (!philo->t->any_dead)
+	if (!philo->t->end)
 		printf("%d %d %s\n", now, philo->name, action);
 	pthread_mutex_unlock(&philo->t->print);
 	return (EXIT_SUCCESS);
