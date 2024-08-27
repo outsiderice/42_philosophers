@@ -26,6 +26,7 @@ typedef struct s_table
 	int				to_sleep;
 	int				meals;
 	int				end;
+	int				error;
 	struct s_philo	*philo;
 	struct timeval	start;
 	pthread_mutex_t	print;

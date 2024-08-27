@@ -25,7 +25,6 @@ void	init_philos(t_table *t)
 		if (left >= t->n_philos)
 			left = 0;
 		t->philo[i].name = i + 1;
-		t->philo[i].status = 1;
 		t->philo[i].n_eaten = 0;
 		t->philo[i].r_fork = &t->forks[i];
 		t->philo[i].l_fork = &t->forks[left];

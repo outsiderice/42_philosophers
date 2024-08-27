@@ -39,7 +39,10 @@ int	philo_loop(t_philo *philo)
 
 int	wait_to_die(t_philo *philo)
 {
-
+	pthread_mutex_lock(&philo->r_fork);
+	print_msg(philo, "has taken a fork\n");
+	time_passes(philo->t, philo->t->to_die);
+	print_msg(philo, "has died\n");
 }
 
 void	*philo_start(t_philo *philo)

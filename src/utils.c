@@ -72,7 +72,8 @@ int	ft_time(t_table *t)
 
 	if (gettimeofday(&time, NULL) == -1)
 	{
-		t->end = 1;
+		t->end = 2;
+		t->error = 1;
 		return (-1);
 	}
 	now = (time.tv_sec - t->start.tv_sec) * 1000

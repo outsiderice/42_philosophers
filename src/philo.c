@@ -28,11 +28,20 @@ int	join_threads(t_table *t)
 	return (EXIT_SUCCESS);
 }
 
-/*
 void	watch_threads(t_table *t)
 {
+	while (1)
+	{
+		if (t->end)
+		{
+			pthread_mutex_lock(&t->print);
+			return (EXIT_SUCCESS);
+		}
+	}
+	join_threads(t);
+	return (EXIT_SUCCESS);
 }
- */
+
 
 int	create_threads(t_table *t)
 {
@@ -64,8 +73,7 @@ int	philosophers(t_table *t)
 		return (EXIT_FAILURE);
 	}
 	pthread_mutex_unlock(&t->ready);
-	//watch_threads(t);
-	join_threads(t);
+	watch_threads(t);	
 	//destroy_all
 	ft_free(t->philo, t->forks, 0);
 	return (EXIT_SUCCESS);
