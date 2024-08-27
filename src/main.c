@@ -92,22 +92,22 @@ int	main(int argc, char **argv)
 
 	if (argc > 6 || argc < 5)
 	{
-		printf("Wrong number of arguments\n");
+		write(2, "Wrong number of arguments\n", 27);
 		return (1);
 	}
 	if (parse(argv) == 1)
 	{
-		printf("Invalid arguments\n");
+		write(2, "Invalid arguments\n", 19);
 		return (2);
 	}
 	if (init_table(argv, &t) == 1)
 	{
-		printf("Error initializing\n");
+		write(2, "Error initializing\n", 20);
 		return (3);
 	}
 	if (philosophers(&t) == 1 || t.error)
 	{
-		printf("Philosophers execution failure\n");
+		write(2, "Philosophers execution failure\n", 32);
 		return (4);
 	}
 	return (0);
