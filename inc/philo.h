@@ -42,6 +42,7 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	struct s_table	*t;
 	int				success;
+	int				timer;
 }	t_philo;
 
 /*   Philo         */
