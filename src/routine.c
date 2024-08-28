@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 18:11:53 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:19:59 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	eating(t_philo *philo)
 		return (EXIT_FAILURE);
 	if (print_msg(philo, "is eating") == 1)
 		return (EXIT_FAILURE);
-	philo->timer = 0;
 	if (time_passes(philo, philo->t->to_eat) == 1)
 		return (EXIT_FAILURE);
 	pthread_mutex_unlock(philo->r_fork);
@@ -47,6 +46,7 @@ int	philo_loop(t_philo *philo)
 {
 	while (!philo->t->end)
 	{
+		philo->timer = 0;
 		if (eating(philo) == 1)
 			return (EXIT_FAILURE);
 		if (sleeping(philo) == 1)
