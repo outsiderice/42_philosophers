@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 15:56:17 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:09:25 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_philos(t_table *t)
 		t->philo[i].r_fork = &t->forks[i];
 		t->philo[i].l_fork = &t->forks[left];
 		t->philo[i].t = t;
+		t->philo[i].timer = 0;
 		i++;
 	}
 }
