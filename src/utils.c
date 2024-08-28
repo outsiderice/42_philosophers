@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 15:57:57 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:51:03 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,28 @@ int	ft_free(void *arg, void *arg2, int status)
 	return (status);
 }
 
-int	time_passes(t_table *t, int wait)
+int	time_passes(t_philo *philo, int wait)
 {
 	int	wait_start;
 	int	time_elapsed;
 
-	wait_start = ft_time(t);
+	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
 		return (EXIT_FAILURE);
-	while ("time passes")
+	while (time_elapsed < philo->t->to_die)
 	{
-		time_elapsed = ft_time(t);
+		time_elapsed = ft_time(philo->t);
 		if (time_elapsed == -1)
 			return (EXIT_FAILURE);
 		if (time_elapsed - wait_start >= wait)
 			break ;
 		usleep(1000);
+	}
+	if (time_elapsed >= philo->t->to_die)
+	{
+		if (print_msg(philo, "has died") == 1)
+			return (EXIT_FAILURE);
+		t->end = 1;
 	}
 	return (EXIT_SUCCESS);
 }
