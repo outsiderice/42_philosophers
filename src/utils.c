@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 18:33:15 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 20:49:08 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,10 @@ int	ft_time(t_table *t)
 
 	if (gettimeofday(&time, NULL) == -1)
 	{
+		pthread_mutex_lock(&philo->t->end_lock);
 		t->end = 2;
 		t->error = 1;
+		pthread_mutex_unlock(&philo->t->end_lock);
 		return (-1);
 	}
 	now = (time.tv_sec - t->start.tv_sec) * 1000
@@ -97,8 +99,10 @@ int	print_msg(t_philo *philo, char *action)
 	if (now == -1)
 		return (EXIT_FAILURE);
 	pthread_mutex_lock(&philo->t->print);
+	pthread_mutex_lock(&philo->t->end_lock);
 	if (!philo->t->end)
 		printf("%d %d %s\n", now, philo->name, action);
+	pthread_mutex_unlock(&philo->t->end_lock);
 	pthread_mutex_unlock(&philo->t->print);
 	return (EXIT_SUCCESS);
 }
