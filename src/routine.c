@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 16:47:54 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:53:32 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ int	die_alone(t_philo *philo)
 		return (EXIT_FAILURE);
 	if (time_passes(philo->t, philo->t->to_die) == 1)
 		return (EXIT_FAILURE);
-	if (print_msg(philo, "has died") == 1)
-		return (EXIT_FAILURE);
-	philo->t->end = 1;
 	return (EXIT_SUCCESS);
 }
 
