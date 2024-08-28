@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 18:08:53 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:11:53 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	eating(t_philo *philo)
 		return (EXIT_FAILURE);
 	if (print_msg(philo, "is thinking") == 1)
 		return (EXIT_FAILURE);
-	while (!pthread_mutex_lock(philo->l_fork))
+	if (!pthread_mutex_lock(philo->l_fork))
 		time_passes(philo, 1);
 	if (print_msg(philo, "has taken a fork") == 1)
 		return (EXIT_FAILURE);
