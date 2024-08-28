@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/26 16:34:28 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:11:24 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int	join_threads(t_table *t)
 {
 	int	i;
-	int	*return_val;
 
 	i = 0;
 	while (i < t->n_philos)
 	{
-		if (pthread_join(t->philo[i].id, (void **)return_val) != 0 || \
-				!t->philo[i].success)
+		if (pthread_join(t->philo[i].id, NULL) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 15:42:53 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:12:49 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,16 @@ int	philo_loop(t_philo *philo)
 */
 int	wait_to_die(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->r_fork);
-	print_msg(philo, "has taken a fork\n");
-	pthread_mutex_unlock(&philo->r_fork);
-	time_passes(philo->t, philo->t->to_die);
-	print_msg(philo, "has died\n");
+	pthread_mutex_lock(philo->r_fork);
+	pthread_mutex_unlock(philo->r_fork);
+	if (print_msg(philo, "has taken a fork") == 1)
+		return (EXIT_FAILURE);
+	if (time_passes(philo->t, philo->t->to_die) == 1)
+		return (EXIT_FAILURE);
+	if (print_msg(philo, "has died") == 1)
+		return (EXIT_FAILURE);
+	philo->t->end = 1;
+	return (EXIT_SUCCESS);
 }
 
 void	*philo_start(t_philo *philo)
@@ -53,7 +58,7 @@ void	*philo_start(t_philo *philo)
 	if (philo->t->n_philos == 1)
 	{
 		if (wait_to_die(philo) == 1)
-			return ;
+			return (NULL);
 	}
 /*
 	else
@@ -67,5 +72,5 @@ void	*philo_start(t_philo *philo)
 			return ;
 	}
 */
-	return ;
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 15:41:49 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 15:56:46 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <pthread.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/time.h>
@@ -59,6 +60,6 @@ int		ft_atoi(const char *str);
 int		ft_free(void *arg, void *arg2, int status);
 int		time_passes(t_table *t, int wait);
 int		ft_time(t_table *t);
-void	print_msg(t_philo *philo, char *action);
+int		print_msg(t_philo *philo, char *action);
 
 #endif
