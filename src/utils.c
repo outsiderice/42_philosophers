@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 16:51:03 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:00:04 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ int	time_passes(t_philo *philo, int wait)
 	int	wait_start;
 	int	time_elapsed;
 
+	time_elapsed = philo->timer;
 	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
 		return (EXIT_FAILURE);
 	while (time_elapsed < philo->t->to_die)
 	{
-		time_elapsed = ft_time(philo->t);
+		time_elapsed = philo->timer + ft_time(philo->t);
 		if (time_elapsed == -1)
 			return (EXIT_FAILURE);
 		if (time_elapsed - wait_start >= wait)
@@ -68,6 +69,7 @@ int	time_passes(t_philo *philo, int wait)
 			return (EXIT_FAILURE);
 		t->end = 1;
 	}
+	philo->timer = time_elapsed;
 	return (EXIT_SUCCESS);
 }
 
