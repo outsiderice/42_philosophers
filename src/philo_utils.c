@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/29 18:18:35 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 19:21:38 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	time_passes(t_philo *philo, int wait)
 			return (EXIT_FAILURE);
 		if (now - wait_start >= wait)
 			break ;
-		usleep(1000);
+		usleep(500);
 	}
 	am_i_dead(philo, (now - wait_start));
 	return (EXIT_SUCCESS);
