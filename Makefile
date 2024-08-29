@@ -6,7 +6,7 @@
 #    By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 18:04:18 by amagnell          #+#    #+#              #
-#    Updated: 2024/08/28 18:21:33 by amagnell         ###   ########.fr        #
+#    Updated: 2024/08/29 12:36:44 by amagnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,12 @@ INC		= inc/philo.h \
 
 #      FILES        #
 SRC_DIR 	= src
-SRCS 		= src/main.c \
-		  src/parsing.c \
-		  src/philo.c \
-		  src/routine.c \
-		  src/utils.c
+SRCS 		=	src/main.c \
+		  		src/parsing.c \
+		  		src/philo.c \
+		  		src/routine.c \
+				src/philo_utils.c \
+				src/utils.c
 
 #    OBJS & DEPS    #
 BUILD_DIR	= .build
