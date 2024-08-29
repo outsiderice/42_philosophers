@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/29 16:05:19 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:16:25 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,24 @@ int	sleeping(t_philo *philo)
 int	eating(t_philo *philo)
 {
 	printf("%d START of eating\n", philo->name);
-	pthread_mutex_lock(philo->r_fork);
+	//pthread_mutex_lock(philo->r_fork);
 	if (print_msg(philo, "has taken a fork") == 1)
 		return (EXIT_FAILURE);
 	if (print_msg(philo, "is thinking") == 1)
 		return (EXIT_FAILURE);
-	if (!pthread_mutex_lock(philo->l_fork))
-		time_passes(philo, 1);
+	//if (!pthread_mutex_lock(philo->l_fork))
+	time_passes(philo, 1);
 	if (print_msg(philo, "has taken a fork") == 1)
 		return (EXIT_FAILURE);
 	if (print_msg(philo, "is eating") == 1)
 		return (EXIT_FAILURE);
 	printf("%d A\n", philo->name);
 	philo->timer = 0;
-	printf("%d TIME TO EAT\n", philo->t->to_eat);
 	if (time_passes(philo, philo->t->to_eat) == 1)
 		return (EXIT_FAILURE);
 	printf("%d B\n", philo->name);
-	pthread_mutex_unlock(philo->r_fork);
-	pthread_mutex_unlock(philo->l_fork);
+	//pthread_mutex_unlock(philo->r_fork);
+	//pthread_mutex_unlock(philo->l_fork);
 	printf("%d end of eating\n", philo->name);
 	return (EXIT_SUCCESS);
 }

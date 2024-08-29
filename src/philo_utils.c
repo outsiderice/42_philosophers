@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/29 16:05:51 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:26:56 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,18 @@ void	am_i_dead(t_philo *philo, int time_elapsed)
 int	time_passes(t_philo *philo, int wait)
 {
 	int	wait_start;
-	int	time_elapsed;
+	int	now;
 
-	time_elapsed = 0;
 	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
 		return (EXIT_FAILURE);
-	printf("WAIT_START %d in %d\n", wait_start, philo->name);
-	while (time_elapsed - wait_start < wait)
+	while ("fuck you")
 	{
-		time_elapsed = ft_time(philo->t);
-		printf("ELAPSED %d in %d\n", time_elapsed, philo->name);
-		if (time_elapsed == -1)
+		now = ft_time(philo->t);
+		if (now == -1)
 			return (EXIT_FAILURE);
-		usleep(200);
+		if (now - wait_start >= wait)
+			return (EXIT_SUCCESS);
+		usleep(1000);
 	}
-	return (EXIT_FAILURE);
 }
