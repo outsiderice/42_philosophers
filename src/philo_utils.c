@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/29 15:05:57 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:05:51 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	ft_time(t_table *t)
 
 	if (gettimeofday(&time, NULL) == -1)
 	{
-		pthread_mutex_lock(&t->end_lock);
+		//pthread_mutex_lock(&t->end_lock);
 		t->end = 2;
 		t->error = 1;
-		pthread_mutex_unlock(&t->end_lock);
+		//pthread_mutex_unlock(&t->end_lock);
 		return (-1);
 	}
 	now = (time.tv_sec - t->start.tv_sec) * 1000
@@ -38,10 +38,10 @@ int	print_msg(t_philo *philo, char *action)
 	if (now == -1)
 		return (EXIT_FAILURE);
 	pthread_mutex_lock(&philo->t->print);
-	pthread_mutex_lock(&philo->t->end_lock);
+	//pthread_mutex_lock(&philo->t->end_lock);
 	if (!philo->t->end)
 		printf("%d %d %s\n", now, philo->name, action);
-	pthread_mutex_unlock(&philo->t->end_lock);
+	//pthread_mutex_unlock(&philo->t->end_lock);
 	pthread_mutex_unlock(&philo->t->print);
 	return (EXIT_SUCCESS);
 }
@@ -55,23 +55,23 @@ void	am_i_dead(t_philo *philo, int time_elapsed)
 	}
 }
 
-int	time_passes(t_philo *philo, int wait, int time_elapsed)
+int	time_passes(t_philo *philo, int wait)
 {
 	int	wait_start;
+	int	time_elapsed;
 
+	time_elapsed = 0;
 	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
 		return (EXIT_FAILURE);
-	while (time_elapsed < philo->t->to_die)
+	printf("WAIT_START %d in %d\n", wait_start, philo->name);
+	while (time_elapsed - wait_start < wait)
 	{
 		time_elapsed = ft_time(philo->t);
+		printf("ELAPSED %d in %d\n", time_elapsed, philo->name);
 		if (time_elapsed == -1)
 			return (EXIT_FAILURE);
-		if (time_elapsed - wait_start >= wait)
-			break ;
 		usleep(200);
 	}
-	am_i_dead(philo, time_elapsed);
-	philo->timer = time_elapsed;
 	return (EXIT_FAILURE);
 }
