@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/29 16:47:59 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:16:37 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	sleeping(t_philo *philo)
 {
+	//printf("%d SLEEPTIME\n", philo->t->to_sleep);
 	if (print_msg(philo, "is sleeping") == 1)
 		return (EXIT_FAILURE);
 	if (time_passes(philo, philo->t->to_sleep) == 1)
@@ -24,13 +25,12 @@ int	sleeping(t_philo *philo)
 
 int	eating(t_philo *philo)
 {
+	if (print_msg(philo, "is thinking") == 1)
+		return (EXIT_FAILURE);
 	pthread_mutex_lock(philo->r_fork);
 	if (print_msg(philo, "has taken a fork") == 1)
 		return (EXIT_FAILURE);
-	if (print_msg(philo, "is thinking") == 1)
-		return (EXIT_FAILURE);
-	if (!pthread_mutex_lock(philo->l_fork))
-		time_passes(philo, 1);
+	pthread_mutex_lock(philo->l_fork);
 	if (print_msg(philo, "has taken a fork") == 1)
 		return (EXIT_FAILURE);
 	if (print_msg(philo, "is eating") == 1)
