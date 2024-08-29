@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/29 16:42:48 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:46:06 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	print_msg(t_philo *philo, char *action)
 
 void	am_i_dead(t_philo *philo, int time_elapsed)
 {
-	if (time_elapsed >= philo->t->to_die)
+	philo->timer  = philo->timer + time_elapsed;
+	if (philo->timer >= philo->t->to_die)
 	{
 		print_msg(philo, "died");
 		philo->t->end = 1;
@@ -72,5 +73,6 @@ int	time_passes(t_philo *philo, int wait)
 			break ;
 		usleep(1000);
 	}
+	am_i_dead(philo, (now - wait_start));
 	return (EXIT_SUCCESS);
 }
