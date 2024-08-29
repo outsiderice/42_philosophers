@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:50:24 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 20:49:08 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 12:09:30 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,14 @@ int	ft_free(void *arg, void *arg2, int status)
 	return (status);
 }
 
-int	time_passes(t_philo *philo, int wait)
+int	time_passes(t_philo *philo, int wait, int time_elapsed)
 {
 	int	wait_start;
-	int	time_elapsed;
 
-	time_elapsed = 0;
 	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
 		return (EXIT_FAILURE);
-	while (time_elapsed + philo->timer < philo->t->to_die)
+	while (time_elapsed < philo->t->to_die)
 	{
 		time_elapsed = ft_time(philo->t);
 		if (time_elapsed == -1)
@@ -65,11 +63,11 @@ int	time_passes(t_philo *philo, int wait)
 	}
 	if (time_elapsed >= philo->t->to_die)
 	{
-		if (print_msg(philo, "has died") == 1)
+		if (print_msg(philo, "died") == 1)
 			return (EXIT_FAILURE);
 		philo->t->end = 1;
 	}
-	philo->timer = philo->timer + time_elapsed;
+	philo->timer = time_elapsed;
 	return (EXIT_SUCCESS);
 }
 
@@ -80,10 +78,10 @@ int	ft_time(t_table *t)
 
 	if (gettimeofday(&time, NULL) == -1)
 	{
-		pthread_mutex_lock(&philo->t->end_lock);
+		pthread_mutex_lock(&t->end_lock);
 		t->end = 2;
 		t->error = 1;
-		pthread_mutex_unlock(&philo->t->end_lock);
+		pthread_mutex_unlock(&t->end_lock);
 		return (-1);
 	}
 	now = (time.tv_sec - t->start.tv_sec) * 1000

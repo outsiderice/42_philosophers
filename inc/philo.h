@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 20:39:26 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 12:05:56 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*philo_start(t_philo *philo);
 /*   Utils         */
 int		ft_atoi(const char *str);
 int		ft_free(void *arg, void *arg2, int status);
-int		time_passes(t_philo *philo, int wait);
+int		time_passes(t_philo *philo, int wait, int time_elapsed);
 int		ft_time(t_table *t);
 int		print_msg(t_philo *philo, char *action);
 

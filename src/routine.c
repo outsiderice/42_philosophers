@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 18:31:17 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/29 12:08:31 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	sleeping(t_philo *philo)
 {
 	if (print_msg(philo, "is sleeping") == 1)
 		return (EXIT_FAILURE);
-	if (time_passes(philo, philo->t->to_sleep) == 1)
+	if (time_passes(philo, philo->t->to_sleep, philo->timer) == 1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -30,12 +30,12 @@ int	eating(t_philo *philo)
 	if (print_msg(philo, "is thinking") == 1)
 		return (EXIT_FAILURE);
 	if (!pthread_mutex_lock(philo->l_fork))
-		time_passes(philo, 1);
+		time_passes(philo, 1, philo->timer);
 	if (print_msg(philo, "has taken a fork") == 1)
 		return (EXIT_FAILURE);
 	if (print_msg(philo, "is eating") == 1)
 		return (EXIT_FAILURE);
-	if (time_passes(philo, philo->t->to_eat) == 1)
+	if (time_passes(philo, philo->t->to_eat, philo->timer) == 1)
 		return (EXIT_FAILURE);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
@@ -61,7 +61,7 @@ int	die_alone(t_philo *philo)
 	pthread_mutex_unlock(philo->r_fork);
 	if (print_msg(philo, "has taken a fork") == 1)
 		return (EXIT_FAILURE);
-	if (time_passes(philo, philo->t->to_die) == 1)
+	if (time_passes(philo, philo->t->to_die, philo->timer) == 1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -77,9 +77,10 @@ void	*philo_start(t_philo *philo)
 	}
 	else
 	{
+		philo->timer = 0;
 		if ((philo->name % 2) == 0)
 		{
-			if (time_passes(philo, 1) == 1)
+			if (time_passes(philo, 1, philo->timer) == 1)
 				return (NULL);
 		}
 		if (philo_loop(philo) == 1)
