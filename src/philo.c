@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 17:49:04 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:53:06 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	join_threads(t_table *t)
 	i = 0;
 	while (i < t->n_philos)
 	{
+		printf("join threads\n");
 		if (pthread_join(t->philo[i].id, NULL) != 0)
 			return (EXIT_FAILURE);
 		i++;
@@ -30,12 +31,15 @@ int	watch_threads(t_table *t)
 {
 	while (1)
 	{
+		pthread_mutex_lock(&t->end_lock);
 		if (t->end)
 		{
 			pthread_mutex_lock(&t->print);
 			break ;
 		}
+		pthread_mutex_unlock(&t->end_lock);
 	}
+	pthread_mutex_unlock(&t->end_lock);
 	if (join_threads(t) == 1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -76,8 +80,10 @@ int	philosophers(t_table *t)
 		destroy_all_mutex(t, t->n_philos);
 		ft_free(t->philo, t->forks, 1);
 		return (EXIT_FAILURE);
-	}	
+	}
+	printf("after watch threads and join\n");
 	destroy_all_mutex(t, t->n_philos);
 	ft_free(t->philo, t->forks, 0);
+	printf("end of philo\n");
 	return (EXIT_SUCCESS);
 }
