@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/30 16:07:59 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:10:31 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	init_philos(t_table *t)
 		t->philo[i].t = t;
 		t->philo[i].timer = 0;
 		if (pthread_mutex_init(&t->philo[i].timer_lock, NULL) != 0)
+			return (EXIT_FAILURE);
+		if (pthread_mutex_init(&t->philo[i].meals_lock, NULL) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}

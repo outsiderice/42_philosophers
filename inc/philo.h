@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/30 16:01:14 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:09:27 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 	struct s_table	*t;
 	int				timer;
 	pthread_mutex_t	timer_lock;
+	pthread_mutex_t	meals_lock;
 }	t_philo;
 
 /*   Main          */
