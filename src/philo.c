@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/30 15:53:06 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:14:59 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,25 @@ int	join_threads(t_table *t)
 
 int	watch_threads(t_table *t)
 {
-	while (1)
+	int	i;
+
+	i = 0
+	while (i < t->n_philos)
 	{
-		pthread_mutex_lock(&t->end_lock);
-		if (t->end)
+		pthread_mutex_lock(t->philo[i].timer_lock);
+		if (t->philo[i].timer >= t->to_die)
 		{
-			pthread_mutex_lock(&t->print);
-			break ;
+			pthread_mutex_lock(&t->end_lock);
+			t->end = 1;
+			print_msg(t->philo[i], "died");
+			phthread_mutex_unlock(&t->end_lock);
 		}
-		pthread_mutex_unlock(&t->end_lock);
+		pthread_mutex_unlock(t->philo[i].timer_lock);
+		i++;
+		if (i == t->n_philos)
+			i = 0;
+		usleep(250);
 	}
-	pthread_mutex_unlock(&t->end_lock);
-	if (join_threads(t) == 1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }
 
 int	create_threads(t_table *t)

@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/30 15:27:29 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:56:16 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,6 @@ int	print_msg(t_philo *philo, char *action)
 	return (EXIT_SUCCESS);
 }
 
-void	am_i_dead(t_philo *philo, int time_elapsed)
-{
-	philo->timer  = philo->timer + time_elapsed;
-	//printf("%d-TIMER = %d\n", philo->name, philo->timer);
-	if (philo->timer >= philo->t->to_die)
-	{
-		printf("++++++++++++++\n");
-		print_msg(philo, "died");
-		philo->t->end = 1;
-	}
-}
-
 int	time_passes(t_philo *philo, int wait)
 {
 	int	wait_start;
@@ -75,8 +63,5 @@ int	time_passes(t_philo *philo, int wait)
 			break ;
 		usleep(500);
 	}
-	pthread_mutex_lock(&philo->t->end_lock);
-	am_i_dead(philo, (now - wait_start));
-	pthread_mutex_unlock(&philo->t->end_lock);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/29 18:16:37 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:09:33 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int	sleeping(t_philo *philo)
 {
-	//printf("%d SLEEPTIME\n", philo->t->to_sleep);
 	if (print_msg(philo, "is sleeping") == 1)
 		return (EXIT_FAILURE);
 	if (time_passes(philo, philo->t->to_sleep) == 1)
