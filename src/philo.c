@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/30 17:27:39 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:45:37 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ int	finished_eating(t_table	*t)
 	int	i;
 	
 	i = 0;
+
 	while (i < t->n_philos)
 	{
 		pthread_mutex_lock(&t->philo[i].meals_lock);
-		while (t->philo[i].n_eaten == 0)
+		if (t->philo[i].n_eaten == 0)
+		{
+			pthread_mutex_unlock(&t->philo[i].meals_lock);
 			i++;
-		pthread_mutex_unlock(&t->philo[i].meals_lock);
+		}
 	}
 	if (i == t->n_philos)
 	{
