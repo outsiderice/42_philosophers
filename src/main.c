@@ -6,14 +6,14 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/28 20:44:25 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:07:59 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 #include "../inc/parse.h"
 
-void	init_philos(t_table *t)
+int	init_philos(t_table *t)
 {
 	int	i;
 	int	left;
@@ -30,8 +30,11 @@ void	init_philos(t_table *t)
 		t->philo[i].l_fork = &t->forks[left];
 		t->philo[i].t = t;
 		t->philo[i].timer = 0;
+		if (pthread_mutex_init(&t->philo[i].timer_lock, NULL) != 0)
+			return (EXIT_FAILURE);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 void	destroy_all_mutex(t_table *t, int i)

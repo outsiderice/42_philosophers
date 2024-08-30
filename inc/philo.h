@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/29 16:04:12 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:01:14 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	struct s_table	*t;
 	int				timer;
+	pthread_mutex_t	timer_lock;
 }	t_philo;
 
 /*   Main          */
@@ -57,7 +58,6 @@ int		philosophers(t_table *t);
 void	*philo_start(t_philo *philo);
 
 /*   Philo utils   */
-void	am_i_dead(t_philo *philo, int time_elapsed);
 int		time_passes(t_philo *philo, int wait);
 int		ft_time(t_table *t);
 int		print_msg(t_philo *philo, char *action);
