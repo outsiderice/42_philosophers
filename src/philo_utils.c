@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/30 15:56:16 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:38:40 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,8 @@ int	time_passes(t_philo *philo, int wait)
 			break ;
 		usleep(500);
 	}
+	pthread_mutex_lock(&philo->timer_lock);
+	philo->timer = now - wait_start;
+	pthread_mutex_unlock(&philo->timer_lock);
 	return (EXIT_SUCCESS);
 }
