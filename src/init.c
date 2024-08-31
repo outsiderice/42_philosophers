@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 19:23:09 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:24:59 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	init_mutex(t_table *t)
 		pthread_mutex_destroy(&t->meal_end);
 		return (EXIT_FAILURE);
 	}
+	if (init_fork(t) == 1)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);	
 }
 
