@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 14:47:24 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:53:09 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_table
 	int				to_eat;
 	int				to_sleep;
 	int				meals;
+	int				finished_eating;
 	int				end;
 	int				error;
 	struct s_philo	*philo;

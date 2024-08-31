@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 14:47:42 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 15:27:09 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	eating(t_philo *philo)
 	philo->meals_left--;
 	if (philo->meals_left == 0)
 	{
-		pthread_mutex_lock(&philo->meal_end);
+		pthread_mutex_lock(&philo->t->meal_end);
 		philo->t->finished_eating++;
-		pthread_mutex_unlock(&philo->meal_end);
+		pthread_mutex_unlock(&philo->t->meal_end);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -55,6 +55,8 @@ int	philo_loop(t_philo *philo)
 	{
 		if (eating(philo) == 1)
 			return (EXIT_FAILURE);
+		if (philo->meals_left == 0)
+			break ;
 		if (sleeping(philo) == 1)
 			return (EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 14:48:58 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 15:27:40 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,17 @@ int	join_threads(t_table *t)
 
 int	finished_eating(t_table	*t)
 {
-	//have all philos finished eating??
+	pthread_mutex_lock(&t->meal_end);
+	if (t->finished_eating == t->n_philos)
+	{
+		pthread_mutex_unlock(&t->meal_end);
+		pthread_mutex_lock(&t->end_lock);
+		t->end = 1;
+		pthread_mutex_unlock(&t->end_lock);
+		return (1);
+	}
+	pthread_mutex_unlock(&t->meal_end);
+	return (0);
 }
 
 int	watch_threads(t_table *t)
@@ -45,10 +55,10 @@ int	watch_threads(t_table *t)
 			print_msg(&t->philo[i], "died");
 			t->end = 1;
 			pthread_mutex_unlock(&t->end_lock);
+			pthread_mutex_lock(&t->print);
 		}
 		pthread_mutex_unlock(&t->philo[i].timer_lock);
 		i++;
-		printf("watch threads loop\n");
 		if (i == t->n_philos && finished_eating(t) == 0)
 			i = 0;
 		usleep(1000);
@@ -94,7 +104,6 @@ int	philosophers(t_table *t)
 		ft_free(t->philo, t->forks, 1);
 		return (EXIT_FAILURE);
 	}
-	printf("after watch threads and join\n");
 	destroy_all_mutex(t, t->n_philos);
 	ft_free(t->philo, t->forks, 0);
 	printf("end of philo\n");
