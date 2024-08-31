@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 19:17:54 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:51:34 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 		write(2, "Error initializing\n", 20);
 		return (3);
 	}
-	if (philosophers(&t) == 1 || t.error)
+	if (philosophers(&t) == 1 || t.error == 1)
 	{
 		write(2, "Philosophers execution failure\n", 32);
 		return (4);
