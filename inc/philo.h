@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/30 17:09:27 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:00:14 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_philo
 {
 	pthread_t		id;
 	int				name;
-	int				n_eaten;
+	int				meals_left;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	struct s_table	*t;

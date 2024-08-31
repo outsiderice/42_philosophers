@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:16:43 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/30 17:10:31 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:01:21 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_philos(t_table *t)
 		if (left >= t->n_philos)
 			left = 0;
 		t->philo[i].name = i + 1;
-		t->philo[i].n_eaten = 0;
+		t->philo[i].meals_left = t->meals;
 		t->philo[i].r_fork = &t->forks[i];
 		t->philo[i].l_fork = &t->forks[left];
 		t->philo[i].t = t;
