@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 22:28:46 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 23:24:24 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	finished_eating(t_table	*t)
 	return (0);
 }
 
-int	watch_threads(t_table *t, int i, int flag)
+int	watch_threads(t_table *t, int i)
 {
-	while (i < t->n_philos && flag == 0)
+	while (i < t->n_philos)
 	{
 		pthread_mutex_lock(&t->philo[i].timer_lock);
 		if (t->philo[i].timer >= t->to_die)
@@ -58,10 +58,7 @@ int	watch_threads(t_table *t, int i, int flag)
 		pthread_mutex_unlock(&t->philo[i].timer_lock);
 		if (++i == t->n_philos && finished_eating(t) == 0)
 			i = 0;
-		usleep(100);
-		pthread_mutex_lock(&t->end_lock);
-		flag = t->end;
-		pthread_mutex_unlock(&t->end_lock);
+		usleep(10);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -95,7 +92,7 @@ int	philosophers(t_table *t)
 		return (ft_free(t->philo, t->forks, 1));
 	}
 	pthread_mutex_unlock(&t->ready);
-	if (watch_threads(t, 0, 0) == 1)
+	if (watch_threads(t, 0) == 1)
 	{
 		destroy_all_mutex(t, t->n_philos);
 		return (ft_free(t->philo, t->forks, 1));

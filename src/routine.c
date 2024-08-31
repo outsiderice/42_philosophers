@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 22:19:56 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 23:22:02 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	sleeping(t_philo *philo)
 {
 	print_msg(philo, "is sleeping");
 	time_passes(philo, philo->t->to_sleep);
+	usleep(10);
 }
 
 void	thinking(t_philo *philo)
@@ -32,6 +33,7 @@ void	thinking(t_philo *philo)
 	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = philo->timer + (ft_time(philo->t) - wait_start);
 	pthread_mutex_unlock(&philo->timer_lock);
+	usleep(10);
 	print_msg(philo, "has taken a fork");
 	wait_start = ft_time(philo->t);
 	if (philo->name == philo->t->n_philos)
@@ -41,6 +43,7 @@ void	thinking(t_philo *philo)
 	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = philo->timer + (ft_time(philo->t) - wait_start);
 	pthread_mutex_unlock(&philo->timer_lock);
+	usleep(10);
 	print_msg(philo, "has taken a fork");
 }
 
@@ -51,6 +54,7 @@ void	eating(t_philo *philo)
 	philo->timer = 0;
 	pthread_mutex_unlock(&philo->timer_lock);
 	time_passes(philo, philo->t->to_eat);
+	usleep(10);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 	philo->meals_left--;
