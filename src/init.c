@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 19:17:30 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:23:09 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,22 @@ void	destroy_all_mutex(t_table *t, int i)
 		pthread_mutex_destroy(&t->forks[i]);
 }
 
+int	init_fork(t_table *t)
+{
+	int	i;
+
+	i = -1;
+	while (++i < t->n_philos)
+	{
+		if (pthread_mutex_init(&t->forks[i], NULL) != 0)
+		{
+			destroy_all_mutex(t, i);
+			return (EXIT_FAILURE);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	init_mutex(t_table *t)
 {
 	if (pthread_mutex_init(&t->print, NULL) != 0)
@@ -57,24 +73,18 @@ int	init_mutex(t_table *t)
 	}
 	if (pthread_mutex_init(&t->meal_end, NULL) != 0)
 	{
-			destroy_all_mutex();
-			return (EXIT_FAILURE);
+		pthread_mutex_destroy(&t->print);
+		pthread_mutex_destroy(&t->ready);
+		return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_init(&t->end_lock, NULL) != 0)
 	{
 		pthread_mutex_destroy(&t->print);
 		pthread_mutex_destroy(&t->ready);
+		pthread_mutex_destroy(&t->meal_end);
 		return (EXIT_FAILURE);
-	}	
-	while (++i < t->n_philos)
-	{
-		if (pthread_mutex_init(&t->forks[i], NULL) != 0)
-		{
-			destroy_all_mutex(t, i);
-			return (EXIT_FAILURE);
-		}
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);	
 }
 
 int	init_table(char **argv, t_table *t)
