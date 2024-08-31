@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 21:10:17 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 22:01:11 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	thinking(t_philo *philo)
 	print_msg(philo, "has taken a fork");
 }
 
-int	eating(t_philo *philo)
+void	eating(t_philo *philo)
 {
 	print_msg(philo, "is eating");
 	pthread_mutex_lock(&philo->timer_lock);
@@ -60,18 +60,16 @@ int	eating(t_philo *philo)
 		philo->t->finished_eating++;
 		pthread_mutex_unlock(&philo->t->meal_end);
 	}
-	return (EXIT_SUCCESS);
 }
 
-int	philo_loop(t_philo *philo)
+void	philo_loop(t_philo *philo)
 {
 	int	stop;
 
 	stop = 0;
 	while (stop != 1)
 	{
-		if (eating(philo) == 1)
-			return (EXIT_FAILURE);
+		eating(philo);
 		if (philo->meals_left == 0)
 			break ;
 		sleeping(philo);
@@ -79,7 +77,6 @@ int	philo_loop(t_philo *philo)
 		stop = philo->t->end;
 		pthread_mutex_unlock(&philo->t->end_lock);
 	}
-	return (EXIT_SUCCESS);
 }
 
 void	*philo_start(t_philo *philo)
@@ -98,8 +95,7 @@ void	*philo_start(t_philo *philo)
 		pthread_mutex_unlock(&philo->timer_lock);
 		if ((philo->name % 2) == 0)
 			time_passes(philo, 1);
-		if (philo_loop(philo) == 1)
-			return (NULL);
+		philo_loop(philo);
 	}
 	return (NULL);
 }

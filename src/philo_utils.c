@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 21:09:53 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 21:50:07 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_time(t_table *t)
 	if (gettimeofday(&time, NULL) == -1)
 	{
 		pthread_mutex_lock(&t->end_lock);
-		t->end = 2;
+		t->end = 1;
 		t->error = 1;
 		pthread_mutex_unlock(&t->end_lock);
 		return (-1);
@@ -38,14 +38,14 @@ int	ft_time(t_table *t)
 	return (now);
 }
 
-int	print_msg(t_philo *philo, char *action)
+void	print_msg(t_philo *philo, char *action)
 {
 	int	now;
 	int	stop;
 
 	now = ft_time(philo->t);
 	if (now == -1)
-		return (EXIT_FAILURE);
+		return ;
 	pthread_mutex_lock(&philo->t->print);
 	pthread_mutex_lock(&philo->t->end_lock);
 	stop = philo->t->end;
@@ -53,22 +53,21 @@ int	print_msg(t_philo *philo, char *action)
 	if (stop != 1)
 		printf("%d %d %s\n", now, philo->name, action);
 	pthread_mutex_unlock(&philo->t->print);
-	return (EXIT_SUCCESS);
 }
 
-int	time_passes(t_philo *philo, int wait)
+void	time_passes(t_philo *philo, int wait)
 {
 	int	wait_start;
 	int	now;
 
 	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
-		return (EXIT_FAILURE);
+		return ;
 	while ("fuck you")
 	{
 		now = ft_time(philo->t);
 		if (now == -1)
-			return (EXIT_FAILURE);
+			return ;
 		if (now - wait_start >= wait)
 			break ;
 		usleep(500);
@@ -76,5 +75,4 @@ int	time_passes(t_philo *philo, int wait)
 	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = philo->timer + (now - wait_start);
 	pthread_mutex_unlock(&philo->timer_lock);
-	return (EXIT_SUCCESS);
 }

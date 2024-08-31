@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 21:10:57 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 22:01:48 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	*philo_start(t_philo *philo);
 
 /*   Philo utils   */
 void	die_alone(t_philo *philo);
-int		time_passes(t_philo *philo, int wait);
+void	time_passes(t_philo *philo, int wait);
 int		ft_time(t_table *t);
-int		print_msg(t_philo *philo, char *action);
+void	print_msg(t_philo *philo, char *action);
 
 /*   Utils         */
 int		ft_atoi(const char *str);
