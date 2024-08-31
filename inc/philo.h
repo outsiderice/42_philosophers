@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 12:00:14 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:47:24 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_table
 	pthread_mutex_t	print;
 	pthread_mutex_t	ready;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	meal_end;
 	pthread_mutex_t	end_lock;
 }	t_table;
 
@@ -46,7 +47,6 @@ typedef struct s_philo
 	struct s_table	*t;
 	int				timer;
 	pthread_mutex_t	timer_lock;
-	pthread_mutex_t	meals_lock;
 }	t_philo;
 
 /*   Main          */

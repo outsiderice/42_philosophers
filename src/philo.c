@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 12:01:57 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:48:58 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,7 @@ int	join_threads(t_table *t)
 
 int	finished_eating(t_table	*t)
 {
-	int	i;
-	
-	i = 0;
-
-	while (i < t->n_philos)
-	{
-		pthread_mutex_lock(&t->philo[i].meals_lock);
-		if (t->philo[i].meals_left == 0)
-		{
-			pthread_mutex_unlock(&t->philo[i].meals_lock);
-			i++;
-		}
-	}
-	if (i == t->n_philos)
-	{
-		pthread_mutex_lock(&t->end_lock);
-		t->end = 1;
-		pthread_mutex_unlock(&t->end_lock);
-		return (1);
-	}
-	return (0);
+	//have all philos finished eating??
 }
 
 int	watch_threads(t_table *t)
@@ -68,9 +48,10 @@ int	watch_threads(t_table *t)
 		}
 		pthread_mutex_unlock(&t->philo[i].timer_lock);
 		i++;
+		printf("watch threads loop\n");
 		if (i == t->n_philos && finished_eating(t) == 0)
 			i = 0;
-		usleep(250);
+		usleep(1000);
 	}
 	if (join_threads(t) == 1)
 		return (EXIT_FAILURE);
