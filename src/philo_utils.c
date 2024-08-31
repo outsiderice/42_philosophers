@@ -6,11 +6,19 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 20:30:29 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 21:09:53 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void	die_alone(t_philo *philo)
+{
+	pthread_mutex_lock(philo->r_fork);
+	pthread_mutex_unlock(philo->r_fork);
+	print_msg(philo, "has taken a fork");
+	time_passes(philo, philo->t->to_die);
+}
 
 int	ft_time(t_table *t)
 {

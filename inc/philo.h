@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 19:18:53 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 21:10:57 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		philosophers(t_table *t);
 void	*philo_start(t_philo *philo);
 
 /*   Philo utils   */
+void	die_alone(t_philo *philo);
 int		time_passes(t_philo *philo, int wait);
 int		ft_time(t_table *t);
 int		print_msg(t_philo *philo, char *action);

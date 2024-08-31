@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 20:03:44 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 21:03:39 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	init_mutex(t_table *t)
 	}
 	if (init_forks(t) == 1)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);	
+	return (EXIT_SUCCESS);
 }
 
 int	init_table(char **argv, t_table *t)
