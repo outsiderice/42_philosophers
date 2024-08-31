@@ -6,7 +6,7 @@
 #    By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 18:04:18 by amagnell          #+#    #+#              #
-#    Updated: 2024/08/31 19:19:09 by amagnell         ###   ########.fr        #
+#    Updated: 2024/08/31 19:28:11 by amagnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ DEPS		= $(OBJS:%.o=%.d)
 
 #        CC         #
 CC		= cc
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=thread
 CPPFLAGS	= $(addprefix -I, $(INC)) -MMD -MP
 
 #      COMMANDS     #
