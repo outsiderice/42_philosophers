@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 15:27:40 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 15:37:01 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	watch_threads(t_table *t)
 			print_msg(&t->philo[i], "died");
 			t->end = 1;
 			pthread_mutex_unlock(&t->end_lock);
-			pthread_mutex_lock(&t->print);
 		}
 		pthread_mutex_unlock(&t->philo[i].timer_lock);
 		i++;
