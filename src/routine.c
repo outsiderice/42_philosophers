@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 23:49:23 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/01 00:27:12 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sleeping(t_philo *philo)
 {
 	print_msg(philo, "is sleeping");
 	time_passes(philo, philo->t->to_sleep);
-	usleep(1);
+	//usleep(1);
 }
 
 void	thinking(t_philo *philo)
@@ -33,7 +33,7 @@ void	thinking(t_philo *philo)
 	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = philo->timer + (ft_time(philo->t) - wait_start);
 	pthread_mutex_unlock(&philo->timer_lock);
-	usleep(1);
+	//usleep(1);
 	print_msg(philo, "has taken a fork");
 	wait_start = ft_time(philo->t);
 	if (philo->name == philo->t->n_philos)
@@ -43,7 +43,7 @@ void	thinking(t_philo *philo)
 	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = philo->timer + (ft_time(philo->t) - wait_start);
 	pthread_mutex_unlock(&philo->timer_lock);
-	usleep(1);
+	//usleep(1);
 	print_msg(philo, "has taken a fork");
 }
 
@@ -75,8 +75,6 @@ void	philo_loop(t_philo *philo)
 	{
 		thinking(philo);
 		eating(philo);
-		if (philo->meals_left == 0)
-			break ;
 		sleeping(philo);
 		pthread_mutex_lock(&philo->t->end_lock);
 		stop = philo->t->end;
