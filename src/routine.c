@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 22:01:11 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 22:19:56 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	philo_loop(t_philo *philo)
 	stop = 0;
 	while (stop != 1)
 	{
+		thinking(philo);
 		eating(philo);
 		if (philo->meals_left == 0)
 			break ;
