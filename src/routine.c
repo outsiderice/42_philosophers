@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 19:56:40 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:18:23 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->timer_lock);
 	print_msg(philo, "has taken a fork");
 	print_msg(philo, "is eating");;
+	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = 0;
+	pthread_mutex_unlock(&philo->timer_lock);
 	time_passes(philo, philo->t->to_eat);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
@@ -89,7 +91,9 @@ void	*philo_start(t_philo *philo)
 	}
 	else
 	{
+		pthread_mutex_lock(&philo->timer_lock);
 		philo->timer = 0;
+		pthread_mutex_unlock(&philo->timer_lock);
 		if ((philo->name % 2) == 0)
 			time_passes(philo, 1);
 		if (philo_loop(philo) == 1)

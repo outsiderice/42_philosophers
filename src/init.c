@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 19:24:59 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:03:44 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	destroy_all_mutex(t_table *t, int i)
 		pthread_mutex_destroy(&t->forks[i]);
 }
 
-int	init_fork(t_table *t)
+int	init_forks(t_table *t)
 {
 	int	i;
 
@@ -84,7 +84,7 @@ int	init_mutex(t_table *t)
 		pthread_mutex_destroy(&t->meal_end);
 		return (EXIT_FAILURE);
 	}
-	if (init_fork(t) == 1)
+	if (init_forks(t) == 1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);	
 }
