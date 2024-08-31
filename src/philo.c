@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 17:52:52 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 17:54:58 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	watch_threads(t_table *t)
 		i++;
 		if (i == t->n_philos && finished_eating(t) == 0)
 			i = 0;
-		usleep(250);
+		usleep(100);
 	}
 	pthread_mutex_unlock(&t->philo[i].timer_lock);
 	if (join_threads(t) == 1)
