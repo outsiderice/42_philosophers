@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 17:42:22 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 17:57:14 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	sleeping(t_philo *philo)
 {
 	print_msg(philo, "is sleeping");
 	time_passes(philo, philo->t->to_sleep);
-	printf("TIMER %d is %d SLEPT\n", philo->name, philo->timer);
 }
 
 int	eating(t_philo *philo)
@@ -29,20 +28,17 @@ int	eating(t_philo *philo)
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = philo->timer + (ft_time(philo->t) - wait_start);
-	printf("TIMER %d is %d 1rst fork\n", philo->name, philo->timer);
 	pthread_mutex_unlock(&philo->timer_lock);
 	print_msg(philo, "has taken a fork");
 	wait_start = ft_time(philo->t);
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = philo->timer + (ft_time(philo->t) - wait_start);
-	printf("TIMER %d is %d 2nd fork\n", philo->name, philo->timer);
 	pthread_mutex_unlock(&philo->timer_lock);
 	print_msg(philo, "has taken a fork");
 	print_msg(philo, "is eating");;
 	philo->timer = 0;
 	time_passes(philo, philo->t->to_eat);
-	printf("TIMER %d is %d EATEN\n", philo->name, philo->timer);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 	philo->meals_left--;

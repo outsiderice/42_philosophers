@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 14:53:09 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:18:53 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef struct s_philo
 	pthread_mutex_t	timer_lock;
 }	t_philo;
 
-/*   Main          */
+/*   Init          */
+int		init_table(char **argv, t_table *t);
 void	destroy_all_mutex(t_table *t, int i);
 
 /*   Philo         */

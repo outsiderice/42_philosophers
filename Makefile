@@ -6,7 +6,7 @@
 #    By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 18:04:18 by amagnell          #+#    #+#              #
-#    Updated: 2024/08/30 17:29:10 by amagnell         ###   ########.fr        #
+#    Updated: 2024/08/31 19:19:09 by amagnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ INC		= inc/philo.h \
 #      FILES        #
 SRC_DIR 	= src
 SRCS 		=	src/main.c \
+				src/init.c \
 		  		src/parsing.c \
 		  		src/philo.c \
 		  		src/routine.c \

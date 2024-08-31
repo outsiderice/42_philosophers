@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 17:54:58 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 17:57:56 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	watch_threads(t_table *t)
 	while (i < t->n_philos)
 	{
 		pthread_mutex_lock(&t->philo[i].timer_lock);
-		printf("+++++timer %d is %d\n", t->philo[i].name, t->philo[i].timer);
 		if (t->philo[i].timer >= t->to_die)
 		{
 			pthread_mutex_lock(&t->end_lock);
@@ -108,6 +107,5 @@ int	philosophers(t_table *t)
 	}
 	destroy_all_mutex(t, t->n_philos);
 	ft_free(t->philo, t->forks, 0);
-	printf("end of philo\n");
 	return (EXIT_SUCCESS);
 }
