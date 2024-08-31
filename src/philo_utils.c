@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 17:04:13 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:30:29 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ int	ft_time(t_table *t)
 int	print_msg(t_philo *philo, char *action)
 {
 	int	now;
+	int	stop;
 
 	now = ft_time(philo->t);
 	if (now == -1)
 		return (EXIT_FAILURE);
 	pthread_mutex_lock(&philo->t->print);
-	if (!philo->t->end)
+	pthread_mutex_lock(&philo->t->end_lock);
+	stop = philo->t->end;
+	pthread_mutex_unlock(&philo->t->end_lock);
+	if (stop != 1)
 		printf("%d %d %s\n", now, philo->name, action);
 	pthread_mutex_unlock(&philo->t->print);
 	return (EXIT_SUCCESS);

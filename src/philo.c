@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 20:15:07 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:45:49 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	watch_threads(t_table *t)
 		if (t->philo[i].timer >= t->to_die)
 		{
 			pthread_mutex_unlock(&t->philo[i].timer_lock);
-			pthread_mutex_lock(&t->end_lock);
 			print_msg(&t->philo[i], "died");
+			pthread_mutex_lock(&t->end_lock);
 			t->end = 1;
 			pthread_mutex_unlock(&t->end_lock);
 			break ;
