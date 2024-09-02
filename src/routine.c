@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 11:39:26 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:32:42 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ void	eating(t_philo *philo)
 	time_passes(philo, philo->t->to_eat);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
-	philo->meals_left--;
-	if (philo->meals_left == 0)
+	if (philo->t->meals > 0 && philo->meals_left > 0)
 	{
-		pthread_mutex_lock(&philo->t->meal_end);
-		philo->t->finished_eating++;
-		pthread_mutex_unlock(&philo->t->meal_end);
+		philo->meals_left--;
+		if (philo->meals_left == 0)
+		{
+			pthread_mutex_lock(&philo->t->meal_end);
+			philo->t->finished_eating++;
+			pthread_mutex_unlock(&philo->t->meal_end);
+		}
 	}
 }
 
