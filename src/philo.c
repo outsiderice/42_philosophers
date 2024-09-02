@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 12:41:37 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:47:22 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	finished_eating(t_table	*t)
 		pthread_mutex_unlock(&t->end_lock);
 		return (1);
 	}
-	pthread_mutex_unlock(&t->meal_end);
 	return (0);
 }
 
@@ -60,7 +59,7 @@ int	watch_threads(t_table *t, int i, int stop)
 			break ;
 		}
 		pthread_mutex_unlock(&t->philo[i].timer_lock);
-		if (finished_eating(t) == 1)
+		if (t->meals > 0 && finished_eating(t) == 1)
 			break ;
 		pthread_mutex_lock(&t->err);
 		stop = t->error;
