@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 16:08:47 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:52:03 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	sleeping(t_philo *philo)
 {
 	print_msg(philo, "is sleeping");
-	time_passes(philo, philo->t->to_sleep);
+	time_passes(philo, philo->t->to_sleep, 0);
 }
 
 void	thinking(t_philo *philo)
@@ -40,7 +40,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->timer_lock);
 	philo->timer = 0;
 	pthread_mutex_unlock(&philo->timer_lock);
-	time_passes(philo, philo->t->to_eat);
+	time_passes(philo, philo->t->to_eat, 0);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 	if (philo->t->meals > 0 && philo->meals_left > 0)
@@ -86,7 +86,7 @@ void	*philo_start(t_philo *philo)
 		philo->timer = 0;
 		pthread_mutex_unlock(&philo->timer_lock);
 		if ((philo->name % 2) == 0)
-			time_passes(philo, 1);
+			time_passes(philo, 1, 0);
 		philo_loop(philo);
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 12:15:05 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:59:28 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	die_alone(t_philo *philo)
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_unlock(philo->r_fork);
 	print_msg(philo, "has taken a fork");
-	time_passes(philo, philo->t->to_die + 1);
+	time_passes(philo, philo->t->to_die + 1, 0);
 }
 
 int	ft_time(t_table *t)
@@ -58,24 +58,31 @@ void	print_msg(t_philo *philo, char *action)
 	pthread_mutex_unlock(&philo->t->print);
 }
 
-void	time_passes(t_philo *philo, int wait)
+void	time_passes(t_philo *philo, int wait, int flag)
 {
 	int	wait_start;
 	int	now;
+	int	stop;
 
 	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
 		return ;
-	while ("fuck you")
+	while ("time passes")
 	{
+		pthread_mutex_lock(&philo->t->end_lock);
+		stop = philo->t->end;
+		pthread_mutex_unlock(&philo->t->end_lock);
 		now = ft_time(philo->t);
 		if (now == -1)
 			return ;
-		if (now - wait_start >= wait)
+		if (now - wait_start >= wait || stop == 1)
 			break ;
-		usleep(500);
+		usleep(100);
 	}
-	pthread_mutex_lock(&philo->timer_lock);
-	philo->timer = philo->timer + (now - wait_start);
-	pthread_mutex_unlock(&philo->timer_lock);
+	if (flag == 1)
+	{
+		pthread_mutex_lock(&philo->timer_lock);
+		philo->timer = philo->timer + (now - wait_start);
+		pthread_mutex_unlock(&philo->timer_lock);
+	}
 }
