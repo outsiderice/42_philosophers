@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 11:41:42 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:56:46 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	init_table(char **argv, t_table *t)
 	t->to_eat = ft_atoi(argv[3]);
 	t->to_sleep = ft_atoi(argv[4]);
 	t->meals = -1;
+	t->finished_eating = 0;
 	if (argv[5] != NULL)
 		t->meals = ft_atoi(argv[5]);
 	t->philo = malloc(sizeof(t_philo) * t->n_philos);
