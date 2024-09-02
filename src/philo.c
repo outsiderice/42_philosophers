@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 11:41:05 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:10:31 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	join_threads(t_table *t)
 	return (EXIT_SUCCESS);
 }
 
-int	finished_eating(t_table	*t)
+int	finished_eating(t_table	*t, int *stop)
 {
 	pthread_mutex_lock(&t->meal_end);
 	if (t->finished_eating == t->n_philos)
@@ -35,18 +35,16 @@ int	finished_eating(t_table	*t)
 		pthread_mutex_lock(&t->end_lock);
 		t->end = 1;
 		pthread_mutex_unlock(&t->end_lock);
+		*stop = 1;
 		return (1);
 	}
 	pthread_mutex_unlock(&t->meal_end);
 	return (0);
 }
 
-int	watch_threads(t_table *t, int i)
+int	watch_threads(t_table *t, int i, int stop)
 {
-	int	stop;
-
-	stop = 0;
-	while (i < t->n_philos && stop == 0)
+	while (i < t->n_philos && stop != 1)
 	{
 		pthread_mutex_lock(&t->philo[i].timer_lock);
 		if (t->philo[i].timer > t->to_die)
@@ -59,12 +57,12 @@ int	watch_threads(t_table *t, int i)
 			break ;
 		}
 		pthread_mutex_unlock(&t->philo[i].timer_lock);
-		if (++i == t->n_philos && finished_eating(t) == 0)
-			i = 0;
-		usleep(10);
 		pthread_mutex_lock(&t->err);
 		stop = t->error;
 		pthread_mutex_unlock(&t->err);
+		if (++i == t->n_philos && finished_eating(t, &stop) == 0)
+			i = 0;
+		usleep(10);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -98,7 +96,7 @@ int	philosophers(t_table *t)
 		return (ft_free(t->philo, t->forks, 1));
 	}
 	pthread_mutex_unlock(&t->ready);
-	if (watch_threads(t, 0) == 1)
+	if (watch_threads(t, 0, 0) == 1)
 	{
 		destroy_all_mutex(t, t->n_philos, 0);
 		return (ft_free(t->philo, t->forks, 1));
