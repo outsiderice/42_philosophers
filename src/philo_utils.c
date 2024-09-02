@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 11:37:33 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:15:05 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	print_msg(t_philo *philo, char *action)
 	int	now;
 	int	stop;
 
+	stop = 0;
 	now = ft_time(philo->t);
 	if (now == -1)
 		return ;

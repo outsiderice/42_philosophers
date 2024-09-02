@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 12:10:31 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:41:37 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,19 @@ int	join_threads(t_table *t)
 	return (EXIT_SUCCESS);
 }
 
-int	finished_eating(t_table	*t, int *stop)
+int	finished_eating(t_table	*t)
 {
+	int	finished;
+
+	finished = 0;
 	pthread_mutex_lock(&t->meal_end);
-	if (t->finished_eating == t->n_philos)
+	finished = t->finished_eating;
+	pthread_mutex_unlock(&t->meal_end);
+	if (finished >= t->n_philos)
 	{
-		pthread_mutex_unlock(&t->meal_end);
 		pthread_mutex_lock(&t->end_lock);
 		t->end = 1;
 		pthread_mutex_unlock(&t->end_lock);
-		*stop = 1;
 		return (1);
 	}
 	pthread_mutex_unlock(&t->meal_end);
@@ -57,10 +60,12 @@ int	watch_threads(t_table *t, int i, int stop)
 			break ;
 		}
 		pthread_mutex_unlock(&t->philo[i].timer_lock);
+		if (finished_eating(t) == 1)
+			break ;
 		pthread_mutex_lock(&t->err);
 		stop = t->error;
 		pthread_mutex_unlock(&t->err);
-		if (++i == t->n_philos && finished_eating(t, &stop) == 0)
+		if (++i == t->n_philos)
 			i = 0;
 		usleep(10);
 	}
