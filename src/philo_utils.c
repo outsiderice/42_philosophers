@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 11:23:10 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:37:33 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	time_passes(t_philo *philo, int wait)
 	int	wait_start;
 	int	now;
 
-	
 	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
 		return ;

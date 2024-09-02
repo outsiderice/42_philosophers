@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 11:10:02 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:38:56 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	finished_eating(t_table	*t)
 int	watch_threads(t_table *t, int i)
 {
 	int	stop;
-	
+
 	stop = 0;
 	while (i < t->n_philos && stop == 0)
 	{
@@ -65,7 +65,6 @@ int	watch_threads(t_table *t, int i)
 		pthread_mutex_lock(&t->err);
 		stop = t->error;
 		pthread_mutex_unlock(&t->err);
-			
 	}
 	return (EXIT_SUCCESS);
 }
