@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/08/31 23:11:06 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:23:10 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	die_alone(t_philo *philo)
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_unlock(philo->r_fork);
 	print_msg(philo, "has taken a fork");
-	time_passes(philo, philo->t->to_die);
+	time_passes(philo, philo->t->to_die + 1);
 }
 
 int	ft_time(t_table *t)
@@ -29,8 +29,10 @@ int	ft_time(t_table *t)
 	{
 		pthread_mutex_lock(&t->end_lock);
 		t->end = 1;
-		t->error = 1;
 		pthread_mutex_unlock(&t->end_lock);
+		pthread_mutex_lock(&t->err);
+		t->error = 1;
+		pthread_mutex_unlock(&t->err);
 		return (-1);
 	}
 	now = (time.tv_sec - t->start.tv_sec) * 1000
@@ -60,6 +62,7 @@ void	time_passes(t_philo *philo, int wait)
 	int	wait_start;
 	int	now;
 
+	
 	wait_start = ft_time(philo->t);
 	if (wait_start == -1)
 		return ;
