@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 13:33:02 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:29:32 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	watch_threads(t_table *t, int i, int stop)
 {
 	while (i < t->n_philos && stop != 1)
 	{
+		time_passes(&t->philo[i], 1);
 		pthread_mutex_lock(&t->philo[i].timer_lock);
 		if (t->philo[i].timer > t->to_die)
 		{
@@ -66,7 +67,7 @@ int	watch_threads(t_table *t, int i, int stop)
 		pthread_mutex_unlock(&t->err);
 		if (++i == t->n_philos)
 			i = 0;
-		usleep(10);
+		//usleep(200);
 	}
 	return (EXIT_SUCCESS);
 }
