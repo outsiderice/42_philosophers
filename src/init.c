@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 10:42:16 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:34:29 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,19 @@ int	init_philos(t_table *t)
 	return (EXIT_SUCCESS);
 }
 
-void	destroy_all_mutex(t_table *t, int i)
+void	destroy_all_mutex(t_table *t, int i, int count)
 {
 	pthread_mutex_destroy(&t->print);
 	pthread_mutex_destroy(&t->ready);
-	pthread_mutex_destroy(&t->end_lock);
+	if (count == 2)
+		return ;
 	pthread_mutex_destroy(&t->meal_end);
+	if (count == 3)
+		return ;
+	pthread_mutex_destroy(&t->end_lock);
+	if (count == 4)
+		return ;
+	pthread_mutex_destroy(&t->err);
 	while (--i >= 0)
 		pthread_mutex_destroy(&t->forks[i]);
 }
@@ -55,7 +62,7 @@ int	init_forks(t_table *t)
 	{
 		if (pthread_mutex_init(&t->forks[i], NULL) != 0)
 		{
-			destroy_all_mutex(t, i);
+			destroy_all_mutex(t, i, 0);
 			return (EXIT_FAILURE);
 		}
 	}
@@ -73,19 +80,19 @@ int	init_mutex(t_table *t)
 	}
 	if (pthread_mutex_init(&t->meal_end, NULL) != 0)
 	{
-		pthread_mutex_destroy(&t->print);
-		pthread_mutex_destroy(&t->ready);
+		destroy_all_mutex(t, i, 2);
 		return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_init(&t->end_lock, NULL) != 0)
 	{
-		pthread_mutex_destroy(&t->print);
-		pthread_mutex_destroy(&t->ready);
-		pthread_mutex_destroy(&t->meal_end);
+		destroy_all_mutex(t, i, 3);
 		return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_init(&t->err, NULL) != 0)
+	{
+		destroy_all_mutex(t, i, 4);
 		return (EXIT_FAILURE);
+	}
 	if (init_forks(t) == 1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
