@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 11:34:29 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:41:42 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,17 @@ int	init_mutex(t_table *t)
 	}
 	if (pthread_mutex_init(&t->meal_end, NULL) != 0)
 	{
-		destroy_all_mutex(t, i, 2);
+		destroy_all_mutex(t, 0, 2);
 		return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_init(&t->end_lock, NULL) != 0)
 	{
-		destroy_all_mutex(t, i, 3);
+		destroy_all_mutex(t, 0, 3);
 		return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_init(&t->err, NULL) != 0)
 	{
-		destroy_all_mutex(t, i, 4);
+		destroy_all_mutex(t, 0, 4);
 		return (EXIT_FAILURE);
 	}
 	if (init_forks(t) == 1)

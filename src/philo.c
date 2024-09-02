@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 11:38:56 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:41:05 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,26 @@ int	philosophers(t_table *t)
 {
 	if (create_threads(t) == 1)
 	{
-		destroy_all_mutex(t, t->n_philos);
+		destroy_all_mutex(t, t->n_philos, 0);
 		return (ft_free(t->philo, t->forks, 1));
 	}
 	if (gettimeofday(&t->start, NULL) == -1)
 	{
-		destroy_all_mutex(t, t->n_philos);
+		destroy_all_mutex(t, t->n_philos, 0);
 		return (ft_free(t->philo, t->forks, 1));
 	}
 	pthread_mutex_unlock(&t->ready);
 	if (watch_threads(t, 0) == 1)
 	{
-		destroy_all_mutex(t, t->n_philos);
+		destroy_all_mutex(t, t->n_philos, 0);
 		return (ft_free(t->philo, t->forks, 1));
 	}
 	if (join_threads(t) == 1)
 	{
-		destroy_all_mutex(t, t->n_philos);
+		destroy_all_mutex(t, t->n_philos, 0);
 		return (ft_free(t->philo, t->forks, 1));
 	}
-	destroy_all_mutex(t, t->n_philos);
+	destroy_all_mutex(t, t->n_philos, 0);
 	ft_free(t->philo, t->forks, 0);
 	return (EXIT_SUCCESS);
 }
