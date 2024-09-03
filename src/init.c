@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/03 08:55:52 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 09:54:04 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ int	init_philos(t_table *t)
 		t->philo[i].l_fork = &t->forks[left];
 		t->philo[i].t = t;
 		t->philo[i].time_of_death = t->to_die;
-		if (pthread_mutex_init(&t->philo[i].d_lock, NULL) != 0)
-			return (EXIT_FAILURE);
 		i++;
 	}
 	return (EXIT_SUCCESS);
 }
 
-void	destroy_all_mutex(t_table *t, int i, int count)
+void	destroy_all_mutex(t_table *t, int i, int count, int j)
 {
 	pthread_mutex_destroy(&t->print);
 	pthread_mutex_destroy(&t->ready);
@@ -51,9 +49,13 @@ void	destroy_all_mutex(t_table *t, int i, int count)
 	pthread_mutex_destroy(&t->err);
 	while (--i >= 0)
 		pthread_mutex_destroy(&t->forks[i]);
+	if (count == 5)
+		return ;
+	while (--j >= 0)
+		pthread_mutex_destroy(&t->philo[i].d_lock);
 }
 
-int	init_forks(t_table *t)
+int	init_philo_mutex(t_table *t)
 {
 	int	i;
 
@@ -62,7 +64,16 @@ int	init_forks(t_table *t)
 	{
 		if (pthread_mutex_init(&t->forks[i], NULL) != 0)
 		{
-			destroy_all_mutex(t, i, 0);
+			destroy_all_mutex(t, i, 5, 0);
+			return (EXIT_FAILURE);
+		}
+	}
+	i = -1;
+	while (++i < t->n_philos)
+	{
+		if (pthread_mutex_init(&t->philo[i].d_lock, NULL) != 0)
+		{
+			destroy_all_mutex(t, t->n_philos, 0, i);
 			return (EXIT_FAILURE);
 		}
 	}
@@ -80,20 +91,20 @@ int	init_mutex(t_table *t)
 	}
 	if (pthread_mutex_init(&t->meal_end, NULL) != 0)
 	{
-		destroy_all_mutex(t, 0, 2);
+		destroy_all_mutex(t, 0, 2, 0);
 		return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_init(&t->end_lock, NULL) != 0)
 	{
-		destroy_all_mutex(t, 0, 3);
+		destroy_all_mutex(t, 0, 3, 0);
 		return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_init(&t->err, NULL) != 0)
 	{
-		destroy_all_mutex(t, 0, 4);
+		destroy_all_mutex(t, 0, 4, 0);
 		return (EXIT_FAILURE);
 	}
-	if (init_forks(t) == 1)
+	if (init_philo_mutex(t) == 1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/03 08:52:02 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 09:50:56 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_philo
 
 /*   Init          */
 int		init_table(char **argv, t_table *t);
-void	destroy_all_mutex(t_table *t, int i, int count);
+void	destroy_all_mutex(t_table *t, int i, int count, int j);
 
 /*   Philo         */
 int		philosophers(t_table *t);
