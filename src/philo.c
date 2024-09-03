@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/03 09:53:28 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:53:28 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	watch_threads(t_table *t, int i, int stop)
 		pthread_mutex_unlock(&t->err);
 		if (++i == t->n_philos)
 			i = 0;
+		usleep(400);
 	}
 	return (EXIT_SUCCESS);
 }
