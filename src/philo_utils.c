@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 16:59:28 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 08:59:20 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	die_alone(t_philo *philo)
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_unlock(philo->r_fork);
 	print_msg(philo, "has taken a fork");
-	time_passes(philo, philo->t->to_die + 1, 0);
+	time_passes(philo, philo->t->to_die + 1);
 }
 
 int	ft_time(t_table *t)
@@ -58,7 +58,7 @@ void	print_msg(t_philo *philo, char *action)
 	pthread_mutex_unlock(&philo->t->print);
 }
 
-void	time_passes(t_philo *philo, int wait, int flag)
+void	time_passes(t_philo *philo, int wait)
 {
 	int	wait_start;
 	int	now;
@@ -78,11 +78,5 @@ void	time_passes(t_philo *philo, int wait, int flag)
 		if (now - wait_start >= wait || stop == 1)
 			break ;
 		usleep(100);
-	}
-	if (flag == 1)
-	{
-		pthread_mutex_lock(&philo->timer_lock);
-		philo->timer = philo->timer + (now - wait_start);
-		pthread_mutex_unlock(&philo->timer_lock);
 	}
 }

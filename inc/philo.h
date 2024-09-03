@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:15:48 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/03 08:46:22 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 08:52:02 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	struct s_table	*t;
 	int				time_of_death;
-	pthread_mutex_t	timer_lock;
+	pthread_mutex_t	d_lock;
 }	t_philo;
 
 /*   Init          */

@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 15:56:46 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 08:55:52 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	init_philos(t_table *t)
 		t->philo[i].r_fork = &t->forks[i];
 		t->philo[i].l_fork = &t->forks[left];
 		t->philo[i].t = t;
-		t->philo[i].timer = 0;
-		if (pthread_mutex_init(&t->philo[i].timer_lock, NULL) != 0)
+		t->philo[i].time_of_death = t->to_die;
+		if (pthread_mutex_init(&t->philo[i].d_lock, NULL) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}

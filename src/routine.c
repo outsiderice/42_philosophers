@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/02 16:52:03 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 08:51:21 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	sleeping(t_philo *philo)
 {
 	print_msg(philo, "is sleeping");
-	time_passes(philo, philo->t->to_sleep, 0);
+	time_passes(philo, philo->t->to_sleep);
 }
 
 void	thinking(t_philo *philo)
@@ -37,10 +37,9 @@ void	thinking(t_philo *philo)
 void	eating(t_philo *philo)
 {
 	print_msg(philo, "is eating");
-	pthread_mutex_lock(&philo->timer_lock);
-	philo->timer = 0;
-	pthread_mutex_unlock(&philo->timer_lock);
-	time_passes(philo, philo->t->to_eat, 0);
+	pthread_mutex_lock(&philo->d_lock);
+	pthread_mutex_unlock(&philo->d_lock);
+	time_passes(philo, philo->t->to_eat);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 	if (philo->t->meals > 0 && philo->meals_left > 0)
@@ -82,11 +81,10 @@ void	*philo_start(t_philo *philo)
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->timer_lock);
-		philo->timer = 0;
-		pthread_mutex_unlock(&philo->timer_lock);
+		pthread_mutex_lock(&philo->d_lock);
+		pthread_mutex_unlock(&philo->d_lock);
 		if ((philo->name % 2) == 0)
-			time_passes(philo, 1, 0);
+			time_passes(philo, 1);
 		philo_loop(philo);
 	}
 	return (NULL);
