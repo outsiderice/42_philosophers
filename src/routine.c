@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/03 10:06:00 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:06:52 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ void	thinking(t_philo *philo)
 {
 	print_msg(philo, "is thinking");
 	if (philo->name == philo->t->n_philos && philo->t->n_philos % 2 == 0)
+	{
 		pthread_mutex_lock(philo->l_fork);
-	else
 		pthread_mutex_lock(philo->r_fork);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->r_fork);
+		pthread_mutex_lock(philo->l_fork);
+	}
 	print_msg(philo, "has taken a fork");
-	if (philo->name == philo->t->n_philos && philo->t->n_philos % 2 == 0)
-		pthread_mutex_lock(philo->r_fork);
-	else
-		pthread_mutex_lock(philo->l_fork);
 	print_msg(philo, "has taken a fork");
 }
 
@@ -82,8 +84,8 @@ void	*philo_start(t_philo *philo)
 	}
 	else
 	{
-		if ((philo->name % 2) == 0)
-			time_passes(philo, 1);
+		if ((philo->name % 2) == 1)
+			usleep(1);
 		philo_loop(philo);
 	}
 	return (NULL);
