@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:15:36 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/03 09:54:04 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:39:57 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	destroy_all_mutex(t_table *t, int i, int count, int j)
 	if (count == 5)
 		return ;
 	while (--j >= 0)
-		pthread_mutex_destroy(&t->philo[i].d_lock);
+		pthread_mutex_destroy(&t->philo[j].d_lock);
 }
 
 int	init_philo_mutex(t_table *t)
