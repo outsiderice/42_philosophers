@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/03 15:06:52 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:41:25 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	*philo_start(t_philo *philo)
 	else
 	{
 		if ((philo->name % 2) == 1)
-			usleep(1);
+			time_passes(philo, 1);
 		philo_loop(philo);
 	}
 	return (NULL);
