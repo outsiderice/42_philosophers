@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/04 09:09:00 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:48:44 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	sleeping(t_philo *philo)
 	time_passes(philo, 1);
 }
 
-void	thinking(t_philo *philo, int even)
+void	thinking(t_philo *philo)
 {
 	print_msg(philo, "is thinking");
-	if (philo->name == philo->t->n_philos && even == 1)
+	if (philo->name == philo->t->n_philos)
 	{
 		pthread_mutex_lock(philo->l_fork);
 		pthread_mutex_lock(philo->r_fork);
@@ -37,14 +37,14 @@ void	thinking(t_philo *philo, int even)
 	print_msg(philo, "has taken a fork");
 }
 
-void	eating(t_philo *philo, int even)
+void	eating(t_philo *philo)
 {
 	print_msg(philo, "is eating");
 	pthread_mutex_lock(&philo->d_lock);
 	philo->time_of_death = ft_time(philo->t) + philo->t->to_die;
 	pthread_mutex_unlock(&philo->d_lock);
 	time_passes(philo, philo->t->to_eat);
-	if (philo->name == philo->t->n_philos && even == 1)
+	if (philo->name == philo->t->n_philos)
 	{
 		pthread_mutex_unlock(philo->r_fork);
 		pthread_mutex_unlock(philo->l_fork);
@@ -69,16 +69,12 @@ void	eating(t_philo *philo, int even)
 void	philo_loop(t_philo *philo)
 {
 	int	stop;
-	int	even;
 
 	stop = 0;
-	even = 0;
-	if (philo->t->n_philos % 2 == 0)
-		even = 1;
 	while (stop != 1)
 	{
-		thinking(philo, even);
-		eating(philo, even);
+		thinking(philo);
+		eating(philo);
 		sleeping(philo);
 		pthread_mutex_lock(&philo->t->end_lock);
 		stop = philo->t->end;
