@@ -6,22 +6,18 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:01:21 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/03 16:10:30 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:35:11 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	join_threads(t_table *t)
+int	join_threads(t_table *t, int i)
 {
-	int	i;
-
-	i = 0;
-	while (i < t->n_philos)
+	while (--i >= 0)
 	{
 		if (pthread_join(t->philo[i].id, NULL) != 0)
 			return (EXIT_FAILURE);
-		i++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -81,7 +77,14 @@ int	create_threads(t_table *t)
 	{
 		if (pthread_create(&t->philo[i].id, NULL, \
 			(void *)philo_start, &t->philo[i]) != 0)
+		{
+			pthread_mutex_lock(&t->end_lock);
+			t->end = 1;
+			pthread_mutex_unlock(&t->end_lock);
+			pthread_mutex_unlock(&t->ready);
+			join_threads(t, i);
 			return (EXIT_FAILURE);
+		}
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -105,7 +108,7 @@ int	philosophers(t_table *t)
 		destroy_all_mutex(t, t->n_philos, 0, t->n_philos);
 		return (ft_free(t->philo, t->forks, 1));
 	}
-	if (join_threads(t) == 1)
+	if (join_threads(t, t->n_philos) == 1)
 	{
 		destroy_all_mutex(t, t->n_philos, 0, t->n_philos);
 		return (ft_free(t->philo, t->forks, 1));
