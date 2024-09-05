@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 09:40:33 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/04 19:48:44 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/05 13:35:19 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sleeping(t_philo *philo)
 {
 	print_msg(philo, "is sleeping");
 	time_passes(philo, philo->t->to_sleep);
-	time_passes(philo, 1);
+	usleep(40);
 }
 
 void	thinking(t_philo *philo)
