@@ -6,7 +6,7 @@
 /*   By: amagnell <amagnell@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:20:35 by amagnell          #+#    #+#             */
-/*   Updated: 2024/09/05 13:34:38 by amagnell         ###   ########.fr       */
+/*   Updated: 2024/09/05 20:17:02 by amagnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@ void	print_msg(t_philo *philo, char *action)
 	int	now;
 	int	stop;
 
+	pthread_mutex_lock(&philo->t->print);
 	stop = 0;
 	now = ft_time(philo->t);
 	if (now == -1)
+	{
+		pthread_mutex_unlock(&philo->t->print);
 		return ;
-	pthread_mutex_lock(&philo->t->print);
+	}
 	pthread_mutex_lock(&philo->t->end_lock);
 	stop = philo->t->end;
 	pthread_mutex_unlock(&philo->t->end_lock);
@@ -75,7 +78,7 @@ void	time_passes(t_philo *philo, int wait)
 		if (now - wait_start >= wait || philo->t->end == 1)
 			break ;
 		pthread_mutex_unlock(&philo->t->end_lock);
-		usleep(500);
+		usleep(100);
 	}
 		pthread_mutex_unlock(&philo->t->end_lock);
 }
